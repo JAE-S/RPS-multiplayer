@@ -1,0 +1,172 @@
+/*
+========================================
+Giphy - Layout
+========================================
+*/
+
+* {
+    box-sizing: border-box;
+  }
+  *, *::after, *::before {
+    box-sizing: border-box;
+  }
+
+/*
+========================================
+Header - Nav Bar
+========================================
+*/
+
+.container1 {
+  margin: 0 auto;
+  max-width: 960px;
+
+}
+
+header {
+  background: white;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  color: black;
+  font-family:'Raleway', sans-serif;
+  padding: 20px 40px 20px 40px;
+  position: static;
+  z-index: 1;
+}
+
+nav a {
+  color: black;
+  margin-left: 1rem;
+  padding: .25rem 0;
+}
+
+nav a:hover {
+  border-bottom: 2px solid black;
+  color: grey;
+  font-weight: Bold;
+  text-decoration: none;
+}
+
+/*
+========================================
+Main
+========================================
+*/
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.background {
+  /* background-image: url("");
+  background-repeat: no-repeat;
+  background-size: cover; */
+  background: white;
+  flex-grow: 1;
+  padding: 5vh 5vw;
+  width: 100%;
+  z-index: 0;
+}
+
+.container2 {
+  background: white;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+  margin: 0 auto;
+  /* max-height: 600px;  */
+  /* max-width: 960px; */
+  /* width: 960px; */
+  width: 100%;
+  /* padding: 4vh 4vw 1vh 4vw; */
+  z-index: 1;  
+}
+.masterContainer {
+  display: flex;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background: white;
+  padding: 4vh 4vw 1vh 4vw;
+  flex-direction: column;
+  margin: 0 auto;
+  /* width: 100%; */
+  max-height: 76vh;
+  height: 74vh;
+  /* width: 960px; */
+  max-width: 960px;
+  overflow: scroll;
+}
+
+.container3 { 
+  background: white;
+  border-bottom: 15px solid white; 
+  /* max-height: 580px;  */
+  /* max-width: 960px; */
+  /* width: 960px; */
+  margin: 0 auto;
+  width: 100%;
+  overflow: scroll;
+  /* padding: 0vh 4vw 1vh 4vw;   */
+  z-index: 1;
+  flex-grow: 1;
+}
+  
+/*
+  ========================================
+  footer
+  ========================================
+*/
+
+footer {
+  background: white;
+  border-top: .25px solid silver;
+  color: black;
+  font-family: 'Raleway', sans-serif;
+  padding-bottom: 10px;
+  padding-top: 30px;
+  position: static; 
+  z-index: 1;
+}
+
+/*
+  ========================================
+  Typography - Portfolio Styling
+  ========================================
+*/
+h4 {
+  font-family: 'Raleway', sans-serif;
+  line-height: 40px;
+  font-size: 1.5rem;
+}
+
+h1 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: left;
+  text-decoration: none;
+}
+
+h2 {
+  color: grey;
+  font-family: 'Georgia', Times, 'Times New Roman', Times, serif;
+  font-size: 2rem;
+  margin-right: 1.5rem;
+  text-align: left;
+  text-decoration: none;
+}
+
+p {
+  color: #777777;
+  font-family: 'Raleway', sans-serif;
+}
+/*
+========================================
+  Layout - RPS
+========================================
+*/
+.introImage {
+    background: grey;
+    height: 65vh;
+}
