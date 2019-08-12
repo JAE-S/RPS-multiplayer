@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html> 
     <head> 
-        <title>Giphy</title>
+        <title>RPS-Multiplayer</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -56,12 +56,46 @@
                         <!-- <source src="" type="audio/mpeg"> -->
                         </audio>
                         
-                        <button id="button-player-1" class="btn btn-dark start-button"><span>Player 1</span><!--Launch Game-->
+                        <button id="button-player-1" 
+                                class="btn btn-dark start-button"><span>Player 1</span>
                         </button>
+                        <div class="row" id="player-1-ready"></div>
+                        <div id="player-1-details" class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="entry-userName-1">Username</label>
+
+                                    <input class="form-control" id="entry-userName-1" type="text" required>
+
+                                    <label for="entry-email-1">Email</label>
+
+                                    <input class="form-control" id="entry-email-1" type="text">
+                                </div>
+                                  <button class="btn btn-primary selected" id="submit-player-1" type="submit">Submit</button>
+                            </form>
+                        </div>
+                    
                         
-                        <button id="button-player-2" class="btn btn-dark start-button"><span>Player 2</span><!--Launch Game-->
+                        <button id="button-player-2" 
+                                class="btn btn-dark start-button"><span>Player 2</span>
                         </button>
-                        
+                        <div class="row" id="player-2-ready"></div>
+                        <div id="player-2-details" class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="entry-userName-2">Username</label>
+    
+                                    <input class="form-control" id="entry-userName-2" type="text" required>
+    
+                                    <label for="entry-email-2">Email</label>
+    
+                                    <input class="form-control" id="entry-email-2" type="text">
+                                </div>
+                            
+                                <button class="btn btn-primary selected" id="submit-player-2" type="submit">Submit</button>
+                            </form>
+                        </div>
+                      
                         </div>
                     </div>
                 </div>
@@ -86,6 +120,7 @@
                         <div class="plaer-1">Player 1 info</div>      
                     </div>
                         
+                    <!-- <input id='message-input' placeholder='Message'></input> -->
 
                     <!-- Reset Button-->
                         <!-- <button id="restart" class="btn btn-dark btn-block" onclick="restart()">Play Again</button> -->
