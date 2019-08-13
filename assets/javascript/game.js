@@ -229,11 +229,22 @@ Start Game
                 $('#containerP-' + player_2).addClass('turn');
                 // $('.choice-' + player_1).hide();
 
-                var nextPlayer = database.ref('players/' + player_2 + '/name');
-                nextPlayer.once('value', function(snapshot) {   // Once it's player 2's turn 
-                    nextPlayer = snapshot.val();                // Once it's player 2's turn 
-                        $('#status').html('It is ' + nextPlayer + '\'s turn');
+                // var nextPlayer = database.ref('players/' + player_2 + '/name');
+                // nextPlayer.once('value', function(snapshot) {   // Once it's player 2's turn 
+                //     nextPlayer = snapshot.val();                // Once it's player 2's turn 
+                //         $('#status').html('It is ' + nextPlayer + '\'s turn');
               
+                // });
+            }
+            if (turn === player_1){
+                database.ref('players/' + player_1 + '/').on('value', function(snapshot) {
+                    var data = snapshot.val();
+                    $('#status').html('It is ' + data.name + '\'s turn');
+                });
+            } else {
+                database.ref('players/' + player_2 + '/').on('value', function(snapshot) {
+                    var data = snapshot.val();
+                    $('#status').html('It is ' + data.name + '\'s turn');
                 });
             }
         })
