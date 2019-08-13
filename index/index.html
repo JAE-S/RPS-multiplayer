@@ -39,65 +39,31 @@
         <main class="background"> 
             <div class="masterContainer">
 
-        <!--INSTRUCTIONS PAGE CONTENT-->
+        <!-- INSTRUCTIONS PAGE CONTENT-->
             <section id="instructions">
                 <div class="row align-items-center">
-
-                    <div class="introImage col-lg-6 col-sm-"><!--Left image column-->
-                        <!-- <img src="" class="img-fluid"> -->
+                    <div class="introImage col-lg-6 col-sm-"> <!-- Left image column -->
+                        <img src="" class="img-fluid">
                     </div>
 
                     <div class="col-lg-6 col-sm-"><!--Right text column-->
                         <div class="introPage text-center">
                             <h1>ROCK, PAPER, SCISSORS</h1>
                             <p>Instructions</p>
-                        
-                        <audio id="sound-button">
-                        <!-- <source src="" type="audio/mpeg"> -->
-                        </audio>
-                        
-                        <button id="button-player-1" 
-                                class="btn btn-dark start-button"><span>Player 1</span>
-                        </button>
-                        <div class="row" id="player-1-ready"></div>
-                        <div id="player-1-details" class="card-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="entry-userName-1">Username</label>
 
-                                    <input class="form-control" id="entry-userName-1" type="text" required>
-
-                                    <label for="entry-email-1">Email</label>
-
-                                    <input class="form-control" id="entry-email-1" type="text">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="userName" placeholder="Name">
+                                <div class="input-group-btn">
+                                  <button class="btn btn-primary" id="start" type="submit">START</button>
                                 </div>
-                                  <button class="btn btn-primary selected" id="submit-player-1" type="submit">Submit</button>
-                            </form>
-                        </div>
-                    
-                        
-                        <button id="button-player-2" 
-                                class="btn btn-dark start-button"><span>Player 2</span>
-                        </button>
-                        <div class="row" id="player-2-ready"></div>
-                        <div id="player-2-details" class="card-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="entry-userName-2">Username</label>
-    
-                                    <input class="form-control" id="entry-userName-2" type="text" required>
-    
-                                    <label for="entry-email-2">Email</label>
-    
-                                    <input class="form-control" id="entry-email-2" type="text">
-                                </div>
-                            
-                                <button class="btn btn-primary selected" id="submit-player-2" type="submit">Submit</button>
-                            </form>
-                        </div>
-                      
+                            </div>
                         </div>
                     </div>
+
+                    <audio id="sound-button">
+                    <!-- <source src="" type="audio/mpeg"> -->
+                    </audio>
+
                 </div>
             </section>
 
@@ -120,7 +86,7 @@
                         <div class="plaer-1">Player 1 info</div>      
                     </div>
                         
-                    <!-- <input id='message-input' placeholder='Message'></input> -->
+                    <input id='message-input' placeholder='Message'></input>
 
                     <!-- Reset Button-->
                         <!-- <button id="restart" class="btn btn-dark btn-block" onclick="restart()">Play Again</button> -->

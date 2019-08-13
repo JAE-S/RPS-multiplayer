@@ -3,7 +3,7 @@
 RPS - Multiplayer Game 
 ========================================
 */
-$(document).ready(function(){
+
 /*
 ========================================
 Firebase configuration
@@ -13,11 +13,11 @@ var config = {
     apiKey: "AIzaSyDjD6f9WuqO9tlDUrU_Pb_HwMvFOGrOE2M",
     authDomain: "rps-multiplayer-e6ab6.firebaseapp.com",
     databaseURL: "https://rps-multiplayer-e6ab6.firebaseio.com",
-    storageBucket: "rps-multiplayer-e6ab6.appspot.com",
+    storageBucket: "",
     messagingSenderId: "1062565958363",
   };
 
-firebase.initializeApp(config);    // Initialize Firebase
+firebase.initializeApp(config);   
 
 /*
 ========================================
@@ -25,111 +25,30 @@ GLOBAL VARIABLES
 ========================================
 */
 
-var database = firebase.database(); // Get a reference to the database service
-var userName = "";
-var email = "";
-var buttonClick = 2;
+var database = firebase.database();
+var players = database.ref('players');
+var playerCount = database.ref('playerCount');
+var outcome = database.ref('gameResults');
 
-$('#player-1-details').hide();
-$('#player-2-details').hide();
-$("#submit-player-1").hide();
-$("#submit-player-2").hide();
-/*
-========================================
-Fire-base Authentication 
-========================================
-*/
-    database.ref().on("value", function(snapshot) {
-        if (snapshot.child("userName").exists() && snapshot.child("email").exists()){
-        
-        userName = snapshot.val().userName
-        email = snapshot.val().email
-        
-    }
-        }, function(errorObject) {
-            console.log("The read failed: " + errorObject.code);
-            });
+var player = {
 
-/*
-========================================
-Player 1 Details
-========================================
-*/
-    function player1Details() {
-        $("#submit-player-1").on("click", function(event) {
-            event.preventDefault();
-            
-            for (var i = 0; i < buttonClick; i++) {
-                buttonClick--
-                if (buttonClick === 0){
-                    $('#active-game').show();
-                    $('#instructions').hide();
-                    console.log("start the game");
-                }
-                console.log(buttonClick);
-            }
-            
-            $("#player-1-details").hide();
-            
-            var userName = $("#entry-userName-1").val().trim();
-            var email = $("#entry-email-1").val().trim();
+    name: "",
+    choice: "",
+    wins: 0,
+    losses: 0,
+    uid: ""
+};
 
-            database.ref().push({
-            userName: userName,
-            email: email,
-            });
-                console.log(userName);
-                console.log(email);
-            
-            $("#player-1-ready").text("Player 1: " + userName + " is ready!")
-        });
+var player_1 = null;
+var player_2 = null;
+var totalPlayers = null;
+var nextPlayer = "";
 
-        $("#entry-userName-1").keyup(function() {
-            $("#submit-player-1").show();
-        });
+var gameResults = "";
+$('.choice-1').hide();
+$('.choice-2').hide();
 
-    }
-
-/*
-========================================
-Player 2 Details
-========================================
-*/
-   
-    function player2Details() {
-        $("#submit-player-2").on("click", function(event) {
-            event.preventDefault();
-            
-            for (var i = 0; i < buttonClick; i++) {
-                buttonClick--
-                if (buttonClick === 0){
-                    $('#active-game').show();
-                    $('#instructions').hide();
-                    console.log("start the game");
-                }
-                console.log(buttonClick);
-            }
-            
-            $("#player-2-details").hide();
-            
-            var userName = $("#entry-userName-2").val().trim();
-            var email = $("#entry-email-2").val().trim();
-
-            database.ref().push({
-            userName: userName,
-            email: email,
-            });
-                console.log(userName);
-                console.log(email);
-            
-            $("#player-2-ready").text("Player 2: " + userName + " is ready!")
-        });
-
-        $("#entry-userName-2").keyup(function() {
-            $("#submit-player-2").show();
-        });
-
-    }
+$(document).ready(function() {
 
 /*
 ========================================
@@ -137,49 +56,99 @@ Start Game
 ========================================
 */
 
-    function startGame(){
-    
-        if (buttonClick != 0){
-            $('#active-game').hide();
-            console.log("Player Details");
-        }
-        $('#button-player-1').on("click", function(event){
-            event.preventDefault();
-            $('#player-1-details').toggle();
-        });
-
-        player1Details();
-
-        $('#button-player-2').on("click", function(event){
-            event.preventDefault();
-            $('#player-2-details').toggle();
-        });
-        
-        player2Details();
-
-    }
-    
-    startGame()
-    
-
-/*
+ /*
 ========================================
-Fire-base Chat functionality
+Hide instructions screen 
 ========================================
 */
 
+// $('#instructions').hide();
 
-// function sendChatMessage(){
-//     ref = database.ref().ref("/chat");
-//     messageFeild = document.querySelector("#message-input");
+/*
+========================================
+Add New Players
+========================================
+*/
 
-//     ref.push().set ({
-//         name: firebase.auth().currentUser.userName,
-//         message: messageFeild.value,
-//     })
-// }
-// console.log(userName);
+function newPlayers() {
+    firebase.auth().signInAnonymously();
+    var playerName = $('#userName').val().trim();
+    player.name = playerName;
+    player.uid = firebase.auth().currentUser.uid;
 
+    database.ref().once('value').then(function(snapshot) {
 
+        if (!snapshot.child('players/1').exists()) {       // If a snapsot of player 1 does not exist.. do the following
+            database.ref('players/1/').update(player);    // Updates player 1's details in firebase
+            var player_1_details = $('#player-1');       // Adds Player 1's name 
+            var player_2_details;                       // Prevents duplicate player
+            player_1_details.html(playerName + ' ');
+            player_1_details.append('Wins: ' + player.wins);
+            player_1_details.append('Losses: ' + player.losses);
+            player_1 = 1;
+            player_2 = 2; 
+            nameField.hide();                     // Hides name feild on click 
+            addPlayerButton.hide();              // Hides name feild on click 
+            
+            playerCount.once('value').then(function(snapshot) { // Snapshot of database for player count
+                totalPlayers = snapshot.val();
+                if (totalPlayers === null) {
+                    totalPlayers = 1;
+                    playerCount.set(totalPlayers);
+                } else {
+                    totalPlayers++;
+                    playerCount.set(totalPlayers);
+                }
+            });
+
+        } else if (!snapshot.child('players/2').exists()) {
+
+            database.ref('players/2/').update(player);
+            var player_1_details = $('#player-2');
+            var player_2_details;
+            player_1_details.html(playerName + ' ');
+            player_1_details.append('Wins: ' + player.wins);
+            player_1_details.append('Losses: ' + player.losses);
+            player_1 = 2;
+            player_2 = 1
+            nameField.hide();
+            addPlayerButton.hide();
+            
+            playerCount.once('value').then(function(snapshot) { // Snapshot of database for player count
+                totalPlayers = snapshot.val();
+                if (totalPlayers === null) {
+                    totalPlayers = 1;
+                    playerCount.set(totalPlayers);
+                } else {
+                    totalPlayers++;
+                    playerCount.set(totalPlayers);
+                }
+            });
+
+        } else {
+            alert('This game is currently full. Please try again later.');
+        }
+
+    });
+}
+newPlayers()
+
+/*
+========================================
+Game rules 
+========================================
+*/
+
+/*
+========================================
+Outcome
+========================================
+*/
+
+/*
+========================================
+Chat
+========================================
+*/
 
 })
