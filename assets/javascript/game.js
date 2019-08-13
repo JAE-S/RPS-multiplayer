@@ -171,11 +171,13 @@ Start Game
             var playerOneLosses = data.losses;
 
             if (player_1 === 1) {
+                $('.choice-1').show(); 
                 $("#score-1").show();
                 $('#player-1').html(playerOneName + ' ');
                 $('#score-1').html('Wins: ' + playerOneWins + ' ');
                 $('#score-1').append('Losses: ' + playerOneLosses + ' ');
             } else {
+                $('.choice-2').show(); 
                 $("#score-2").show();
                 $('#player-2').html(playerOneName + ' ');
                 $('#score-2').html('Wins: ' + playerOneWins + ' ');
@@ -192,11 +194,13 @@ Start Game
             var playerTwoLosses = data.losses;
     
             if (player_1 === 1) {
+                $('.choice-2').show(); 
                 $("#score-2").show();
                 $('#player-2').html(playerTwoName + ' ');
                 $('#score-2').html('Wins: ' + playerTwoWins + ' ');
                 $('#score-2').append('Losses: ' + playerTwoLosses + ' ');
             } else {
+                $('.choice-1').show(); 
                 $("#score-1").show();
                 $('#player-1').html(playerTwoName + ' ');
                 $('#score-1').html('Wins: ' + playerTwoWins + ' ');
@@ -219,21 +223,17 @@ Start Game
             if (turn === player_1) {                             // If its player 1's turn... 
                 $('#containerP-' + player_1).addClass('turn');
                 $('#containerP-' + player_2).removeClass('turn');
-                $('.choice-' + player_1).show();
+                // $('.choice-' + player_1).show();
             } else {                                              // If its player 2's turn... 
                 $('#containerP-' + player_1).removeClass('turn');
                 $('#containerP-' + player_2).addClass('turn');
-                $('.choice-' + player_1).hide();
+                // $('.choice-' + player_1).hide();
 
                 var nextPlayer = database.ref('players/' + player_2 + '/name');
                 nextPlayer.once('value', function(snapshot) {   // Once it's player 2's turn 
                     nextPlayer = snapshot.val();                // Once it's player 2's turn 
-                    if (player_1 === 1 && player_1 === 1) {
-                        $('#status').show();
                         $('#status').html('It is ' + nextPlayer + '\'s turn');
-                    } else {
-                        $('#status').hide();
-                    }
+              
                 });
             }
         })
@@ -255,105 +255,182 @@ Player Count
 
 /*
 ========================================
+Submit Choices
+========================================
+*/
+    function submitChoice() {
+
+        var choice = $(this).attr('data-choice');
+        var updateChoice = database.ref('players/' + player_1 + '/choice');
+            updateChoice.set(choice);
+         
+        database.ref('players/' + player_2 + '/choice').on('value', function(snapshot) {
+            compareChoices();
+        });
+        // $('.choice-1').hide();
+        // $('.choice-2').hide();
+        var updateTurn = database.ref('turn');
+        
+        updateTurn.once('value', function(snapshot) {
+            var currentTurn = snapshot.val();
+
+            if (currentTurn === 1) {
+                database.ref('turn').set(2);
+            } else {
+                database.ref('turn').set(1);
+            }
+        });
+    }
+
+ 
+/*
+========================================
+Reset Choices 
+========================================
+*/
+
+    function resetChoice() {
+
+        var choice = "";
+        var update_p1_Choice = database.ref('players/' + player_1 + '/choice');
+        var update_p2_Choice = database.ref('players/' + player_2 + '/choice');
+        update_p1_Choice.set(choice);
+        update_p2_Choice.set(choice);
+        // $('#round-results').html(' ');
+
+    }
+
+    $('.choice-1').on('click', submitChoice);
+    $('.choice-2').on('click', submitChoice);
+
+/*
+========================================
 Choices
 ========================================
 */
 
+    function compareChoices() {
+
         database.ref().once("value", function(snapshot) {
 
-            // Player 1 Details 
-            var player_1 = snapshot.child('players/' + player_1 + '/name').val();
+            // Player 1 database details
+            var player_1_name = snapshot.child('players/' + player_1 + '/name').val();
+            console.log(player_1_name);
             var player_1_choice = snapshot.child('players/' + player_1 + '/choice').val();
             var player_1_wins = snapshot.child('players/' + player_1 + '/wins').val();
             var player_1_losses = snapshot.child('players/' + player_1 + '/losses').val();
-   
-            // Player 2 Details 
-            var player_2 = snapshot.child('players/' + player_2 + '/name').val();
+
+            // Player 2 database details
+            var player_2_name = snapshot.child('players/' + player_2 + '/name').val();
+            console.log(player_2_name);
             var player_2_choice = snapshot.child('players/' + player_2 + '/choice').val();
             var player_2_wins = snapshot.child('players/' + player_2 + '/wins').val();
             var player_2_losses = snapshot.child('players/' + player_2 + '/losses').val();
-
-            // Game Results 
+    
+            // Game Results
             var gameResults = snapshot.child
-
-            // Player 2 winning scenarios 
-            if (player_1_choice === "scissors" && player_2_choice === "paper"){
-                player_1_wins++;
-                database.ref('players/' + player_1 + '/wins').set(player_1_wins);
-
-                player_2_losses++;
-                database.ref('players/' + player_2 + '/losses').set(player_2_losses);
+    
+    
+            if (player_1_choice === "paper") {
+                if (player_2_choice === "scissors") {
+                    player_2_wins++;
+                        database.ref('players/' + player_2 + '/wins').set(player_2_wins);
+                            gameResults = player_2_name + ' wins!';
                     
-                gameResults = player_1 + ' wins!';
-                outcome.update({ gameResults: gameResults })
-            
-            } else if (player_1_choice === "paper" && player_2_choice === "rock"){
-                player_2_wins++;
-                database.ref('players/' + player_1 + '/wins').set(player_1_wins);
-
-                player_2_losses++;
-                database.ref('players/' + player_2 + '/losses').set(player_2_losses);
+                    player_1_losses++;
+                        database.ref('players/' + player_1 + '/losses').set(player_1_losses);
                     
-                gameResults = player_1 + ' wins!';
-                outcome.update({ gameResults: gameResults })
-             
-            } else if (player_1_choice === "rock" && player_2_choice === "scissors"){
-                player_1_wins++;
-                database.ref('players/' + player_1 + '/wins').set(player_1_wins);
+                    outcome.update({ gameResults: gameResults });
+                    resetChoice()
 
-                player_2_losses++;
-                database.ref('players/' + player_2 + '/losses').set(player_2_losses);
-                
-                gameResults = player_1 + ' wins!';
-                outcome.update({ gameResults: gameResults })
-         
-            // Player 2 winning scenarios 
-            } else if (player_2_choice === "scissors" && player_1_choice === "paper"){
-                player_2_wins++;
-                database.ref('players/' + player_2 + '/wins').set(player_2_wins);
-
-                player_1_losses++;
-                database.ref('players/' + player_1 + '/losses').set(player_1_losses);
+                } else if (player_2_choice === "rock") {
+                    player_1_wins++;
+                        database.ref('players/' + player_1 + '/wins').set(player_1_wins);
+                            gameResults = player_1_name+ ' wins!';
                     
-                gameResults = player_2 + ' wins!';
-                outcome.update({ gameResults: gameResults })
-            
-            } else if (player_2_choice === "paper" && player_1_choice === "rock"){
-                player_2_wins++;
-                database.ref('players/' + player_2 + '/wins').set(player_2_wins);
-
-                player_1_losses++;
-                database.ref('players/' + player_1 + '/losses').set(player_1_losses);
+                    player_2_losses++; 
+                        database.ref('players/' + player_2 + '/losses').set(layer_2_losses);
                     
-                gameResults = player_2 + ' wins!';
-                outcome.update({ gameResults: gameResults })
-             
-            } else if (player_2_choice === "rock" && player_1_choice === "scissors"){
-                player_2_wins++;
-                database.ref('players/' + player_2 + '/wins').set(player_2_wins);
+                    outcome.update({ gameResults: gameResults });
+                    resetChoice()
 
-                player_1_losses++;
-                database.ref('players/' + player_1 + '/losses').set(player_1_losses);
-                
-                gameResults = player_2 + ' wins!';
-                outcome.update({ gameResults: gameResults })
+                } else if (player_2_choice === "paper") {
+                    gameResults = 'It\'s a tie!';
+                    outcome.update({ gameResults: gameResults });
+                    resetChoice()
+                }
+    
+    
+            } else if (player_1_choice === "rock") {
+                if (player_2_choice === "paper") {
+                    player_2_wins++;
+                        database.ref('players/' + player_2 + '/wins').set(player_2_wins);
+                            gameResults = player_2_name + ' wins!';
 
-            // Draw - no one wins 
-            } else if (player_1_choice === "paper" && player_2_choice === "paper" || 
-                     player_1_choice === "scissors" && player_2_choice === "scissors" || 
-                     player_1_choice === "rock" && player_2_choice === "rock") {
+                    player_1_losses++;
+                        database.ref('players/' + player_1 + '/losses').set(player_1_losses);
+                    
+                    outcome.update({ gameResults: gameResults });
+                    resetChoice()
+                    
+                } else if (player_2_choice === "scissors") {
+                    player_1_wins++;
+                        database.ref('players/' + player_1 + '/wins').set(player_1_wins);
+                            gameResults = player_1_name + ' wins!';
+                    
+                    player_2_losses++;
+                        database.ref('players/' + player_2 + '/losses').set(player_2_losses);
+                   
+                    outcome.update({ gameResults: gameResults });
+                    resetChoice()
 
-                gameResults = 'It\'s a tie!';
-                outcome.update({ gameResults: gameResults });
+                } else if (player_2_choice === "rock") {
+                    gameResults = 'It\'s a tie!';
+                    outcome.update({ gameResults: gameResults });
+                    resetChoice()
+                }
+
+            } else if (player_1_choice === "scissors") {
+                if (player_2_choice === "rock") {
+                    player_2_wins++;
+                        database.ref('players/' + player_2 + '/wins').set(player_2_wins);
+                            gameResults = player_2_name + ' wins!';
+                    
+                    player_1_losses++;
+                        database.ref('players/' + player_1 + '/losses').set(player_1_losses);
+                  
+                    outcome.update({ gameResults: gameResults });
+                    resetChoice()
+               
+                } else if (player_2_choice === "paper") {
+                    player_1_wins++;
+                        database.ref('players/' + player_1 + '/wins').set(player_1_wins);
+                            gameResults = player_1_name + ' wins!';
+                    
+                    player_2_losses++;
+                    database.ref('players/' + player_2 + '/losses').set(player_2_losses);
+
+                    outcome.update({ gameResults: gameResults });
+                    resetChoice()
+
+                } else if (player_2_choice === "scissors") {
+                    gameResults = 'It\'s a tie!';
+                    outcome.update({ gameResults: gameResults });
+                    resetChoice()
+                }
             }
-        
+           
         });
+    }
 
 /*
 ========================================
 Chat
 ========================================
 */
+outcome.set({
+    gameResults: gameResults
+})
 
 
 
