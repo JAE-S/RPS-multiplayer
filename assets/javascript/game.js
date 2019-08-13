@@ -52,6 +52,10 @@ Hidden Elements
 
 $('.choice-1').hide();              // Initially hides player 1's choice on 
 $('.choice-2').hide();              // Initially hides player 2's choice 
+$("#player-1").hide();
+$("#player-2").hide();
+$("#score-1").hide();
+$("#score-2").hide();
 // $('#instructions').hide();
 
 $(document).ready(function() {
@@ -97,7 +101,9 @@ Add New Players
                 player_2 = 2;                          // Player count
                 nameField.hide();                     // Hides initial name input on submit
                 addPlayerButton.hide();              // Hides initial start button on submit
-                $('#instructions').hide();
+                $('#instructions').hide();          // Hides instructions on player input 
+                $("#player-1").show();             // Shows player 1 on player input 
+                $("#player-2").show();            // Shows player 2 on player input 
                 
                 playerCount.once('value').then(function(snapshot) { // Listens for player count
                     totalPlayers = snapshot.val();
@@ -121,7 +127,9 @@ Add New Players
                 nameField.hide();                   // Hides initial name input on submit
                 addPlayerButton.hide();            // Hides initial start button on submit
                 $('#instructions').hide();
-                
+                $("#player-1").show();            // Shows player 1 on player input 
+                $("#player-2").show();           // Shows player 2 on player input 
+
                 playerCount.once('value').then(function(snapshot) { // Listens for player count
                     totalPlayers = snapshot.val();
                     if (totalPlayers === null) {
@@ -162,13 +170,14 @@ Start Game
             var playerOneLosses = data.losses;
 
             if (player_1 === 1) {
+                $("#score-1").show();
                 $('#player-1').html(playerOneName + ' ');
-                $('#score-1').html('Wins: ' + playerOneWins);
-                $('#score-1').append('Losses: ' + playerOneLosses);
+                $('#score-1').html('Wins: ' + playerOneWins + ' ');
+                $('#score-1').append('Losses: ' + playerOneLosses + ' ');
             } else {
                 $('#player-2').html(playerOneName + ' ');
-                $('#score-2').html('Wins: ' + playerOneWins);
-                $('#score-2').append('Losses: ' + playerOneLosses);
+                $('#score-2').html('Wins: ' + playerOneWins + ' ');
+                $('#score-2').append('Losses: ' + playerOneLosses + ' ');
             }
         })
 
@@ -180,13 +189,14 @@ Start Game
             var playerTwoLosses = data.losses;
     
             if (player_1 === 1) {
+                $("#score-2").show();
                 $('#player-2').html(playerTwoName + ' ');
-                $('#score-2').html('Wins: ' + playerTwoWins);
-                $('#score-2').append('Losses: ' + playerTwoLosses);
+                $('#score-2').html('Wins: ' + playerTwoWins + ' ');
+                $('#score-2').append('Losses: ' + playerTwoLosses + ' ');
             } else {
-                $('#player-1').html(playerTwoName + ' ')
-                $('#player-1').html('Wins: ' + playerTwoWins)
-                $('#score-1').append('Losses: ' + playerTwoLosses);
+                $('#player-1').html(playerTwoName + ' ');
+                $('#score-1').html('Wins: ' + playerTwoWins + ' ');
+                $('#score-1').append('Losses: ' + playerTwoLosses + ' ');
             }
         });
 
@@ -219,20 +229,18 @@ Start Game
         })
     };
 
-    startGame()
-
 /*
 ========================================
-Outcome
+Player Count
 ========================================
 */
-  //Check player count value in database. Trigger startGame function once value equal to 2
-  playerCount.on("value", function(snapshot) {
-    totalPlayers = snapshot.val();
-    if (totalPlayers === 2) {
-        startGame();
-    }
-});
+ 
+    playerCount.on("value", function(snapshot) {       // Checks player count 
+        totalPlayers = snapshot.val();               
+        if (totalPlayers === 2) {                      // If the total player count is 2 start the game 
+            startGame();
+        }
+    });
 /*
 ========================================
 Chat
