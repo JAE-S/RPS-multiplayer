@@ -6,6 +6,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+         <!-- Firebase CDN -->
+         <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-database.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-messaging.js"></script>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -70,23 +76,39 @@
             <!--ACTIVE GAME CONTENT-->
             <section id="active-game">
                 <div class="row align-items-center text-center">
-                   
-                    <div id="rock"></div>
-                    <div id="paper"></div>
-                    <div id="scissors"></div>
-                    
+                    <span class="text-center" id="status"></span>
                 </div>
+                <div class="container" id="round-results"></div>
                     
+    
+                <div class="row align-items-center text-center">
                     <div class="col-lg-6 col-sm-"><!--Right text column-->
-                        <div class="plaer-1">Player 1 info</div> 
-
-                    </div> 
-                    
-                    <div class="col-lg-6 col-sm-">
-                        <div class="plaer-1">Player 1 info</div>      
+                        <div class="containerP turn" id="containerP-1">
+                            <div class="text-center" id="player-1">
+                                <h1>Waiting For Player 1...</h1>
+                            </div>
+                            <div class="text-center" id="score-1">
+                                    <h1>score: </h1>
+                            </div>
+                            <div class="text-center" id="player-1-choice">
+                                <!--choices-->
+                            </div>
+                        </div>
                     </div>
-                        
-                    <input id='message-input' placeholder='Message'></input>
+                    <div class="col-lg-6 col-sm-"><!--Right text column-->
+                        <div class="containerP" id="containerP-2">
+                            <div class="text-center" id="player-2">
+                                <h1>Waiting For Player 2...</h1>
+                            </div>
+                            <div class="text-center" id="score-2">
+                                    <h1>score: </h1>
+                            </div>
+                            <div class="text-center" id="player-2-choice">
+                                <!--choices-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                     <!-- Reset Button-->
                         <!-- <button id="restart" class="btn btn-dark btn-block" onclick="restart()">Play Again</button> -->
@@ -111,10 +133,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         
         <!-- Firebase Core JavaScript Link -->
+        <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase.js"></script>
         <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
-
-        <!-- Specific Firebase products we want (Database) -->
+        <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-messaging.js"></script>
         
         <!-- Game JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
