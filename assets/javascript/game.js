@@ -70,6 +70,9 @@ Start Game
 $('#start').on('click', newPlayers);
 var nameField = $('#userName');             // Hides name feild on click 
 var addPlayerButton = $('#start');         // Stoes new play 
+var chatRef = database.ref().child('chat');
+var messageField = $('#message');
+var chatLog = $('#chat-log');
  /*
 ========================================
 Hide instructions screen 
@@ -159,7 +162,11 @@ Start Game
 ========================================
 */
     function startGame() {
-               // Game Results / Round Outcome
+
+
+        // outcome.once('value', function(snapshot) {             
+        //     $('#round-results').html(snapshot.val().gameResults + '');
+        // })
        
         // Player details from the database
         var playerOne = database.ref('players/' + player_1 + '/');
@@ -173,7 +180,7 @@ Start Game
             var playerOneLosses = data.losses;
 
             if (player_1 === 1) {
-                $('.choice-1').show(); 
+                // $('.choice-1').show(); 
                 $("#score-1").show();
                 $('#player-1').html(playerOneName + ' ');
                 $('#score-1').html('Wins: ' + playerOneWins + ' ');
@@ -190,7 +197,7 @@ Start Game
             var playerTwoLosses = data.losses;
     
             if (player_2 === 2) {
-                $('.choice-2').show(); 
+                // $('.choice-2').show(); 
                 $("#score-2").show();
                 $('#player-2').html(playerTwoName + ' ');
                 $('#score-2').html('Wins: ' + playerTwoWins + ' ');
@@ -219,6 +226,8 @@ Start Game
                 playerOne.on('value', function(snapshot) {
                     var data = snapshot.val();
                     var playerOneName = data.name;
+                    $('.choice-1').show();
+                    $('.choice-2').hide();
                     $('#status').html('It is ' + playerOneName + '\'s turn');
                     console.log("please update to: " + playerOneName + "\"s turn");
                 })
@@ -227,6 +236,8 @@ Start Game
                 playerTwo.on('value', function(snapshot) {
                     var data = snapshot.val();
                     var playerTwoName = data.name;
+                    $('.choice-1').hide();
+                    $('.choice-2').show();
                     $('#status').html('It is ' + playerTwoName + '\'s turn');
                     console.log("please update to: " + playerTwoName + "\"s turn");
                 })
@@ -236,7 +247,14 @@ Start Game
         })
     };
  
+    database.ref('gameResults').on('value', function(snapshot)  {     
+        var data = snapshot.val().gameResults;   
+    $('.round-results').html(data + ' ');
+})
 
+outcome.set({
+    gameResults: gameResults
+})
 /*
 ========================================
 Player Count
@@ -253,22 +271,21 @@ Player Count
 
 /*
 ========================================
-Submit Choices
+Turn Tracker
 ========================================
 */
-    // function resetTurn() {
-
 
     $(".resetTurn").on('click', function (){
         database.ref().once("value", function(snapshot) {
             var player_1_name = snapshot.child('players/' + player_1 + '/name').val();
             var player_2_name = snapshot.child('players/' + player_2 + '/name').val();
 
-            turn.once('value').then(function(snapshot) { // Listens for player count
+
+            turn.once('value').then(function(snapshot) { 
                 currentTurn = snapshot.val();
                 if (currentTurn === null) {
                     currentTurn = 1;
-                    turn.set(currentTurn); // Updates the playerCount in the database = totalPlayers
+                    turn.set(currentTurn); 
                 } else if (currentTurn === 1) {
                     currentTurn = 2;
                     turn.set(currentTurn); 
@@ -281,11 +298,12 @@ Submit Choices
                     console.log("please update to: " + player_2_name + "\"s turn");
                     console.log("My turn should be 2: " + currentTurn);
                     console.log("player 2: clicked a button");
+                    
                 }
             });
-});
-})
-    // }
+        });
+    })
+ 
  
 /*
 ========================================
@@ -303,6 +321,12 @@ Reset Choices
       
     }
 
+/*
+========================================
+Submit Choices 
+========================================
+*/
+
     $('.choice-1').on('click', function(){
         var choice_1 = $(this).attr('data-choice');
         var update_p1_Choice = database.ref('players/' + player_1 + '/choice');
@@ -317,9 +341,9 @@ Reset Choices
         update_p2_Choice.set(choice_1);
         console.log(choice_1);
         compareChoices();
-   
+
     });
-   
+    
 /*
 ========================================
 Choices
@@ -353,31 +377,31 @@ Choices
                 if (player_2_choice === "scissors") {
                     player_2_wins++;
                         database.ref('players/' + player_2 + '/wins').set(player_2_wins);
-                            gameResults = player_2_name + ' wins!';
+                            gameResults = player_2_name + ' wins! ' + player_2_name + " you shredded " + player_1_name + " with scissors!";
                     
                     player_1_losses++;
                         database.ref('players/' + player_1 + '/losses').set(player_1_losses);
                     
                     outcome.update({ gameResults: gameResults });
-                    $('#round-results').html(player_2_name + ' wins! ' + player_2_name + " you shredded " + player_1_name + " with scissors!");
+                    // $('.round-results').html(player_2_name + ' wins! ' + player_2_name + " you shredded " + player_1_name + " with scissors!");
                     resetChoice();
 
                 } else if (player_2_choice === "rock") {
                     player_1_wins++;
                         database.ref('players/' + player_1 + '/wins').set(player_1_wins);
-                            gameResults = player_1_name+ ' wins!';
+                            gameResults = player_1_name + ' wins! ' + player_1_name + " you covered " + player_2_name + " with paper!";
                     
                     player_2_losses++; 
                         database.ref('players/' + player_2 + '/losses').set(layer_2_losses);
                     
                     outcome.update({ gameResults: gameResults });
-                    $('#round-results').html(player_1_name + ' wins! ' + player_1_name + " you covered " + player_2_name + " with paper!");
+                    // $('.round-results').html(player_1_name + ' wins! ' + player_1_name + " you covered " + player_2_name + " with paper!");
                     resetChoice();
 
                 } else if (player_2_choice === "paper") {
-                    gameResults = 'It\'s a tie!';
+                    gameResults = 'Nice try, but it\'s a tie!';
                     outcome.update({ gameResults: gameResults });
-                    $('#round-results').html('Nice try, but it\'s a tie!');
+                    // $('.round-results').html('Nice try, but it\'s a tie!');
                     resetChoice();
                 }
     
@@ -386,31 +410,34 @@ Choices
                 if (player_2_choice === "paper") {
                     player_2_wins++;
                         database.ref('players/' + player_2 + '/wins').set(player_2_wins);
-                            gameResults = player_2_name + ' wins!';
+                            gameResults = player_2_name + ' wins! ' + player_2_name + " you covered " + player_1_name + " with paper!";
+                            console.log(gameResults);
 
                     player_1_losses++;
                         database.ref('players/' + player_1 + '/losses').set(player_1_losses);
                     
                     outcome.update({ gameResults: gameResults });
-                    $('#round-results').html(player_2_name + ' wins! ' + player_2_name + " you covered " + player_1_name + " with paper!");
+                    // $('.round-results').html(player_2_name + ' wins! ' + player_2_name + " you covered " + player_1_name + " with paper!");
                     resetChoice();
                     
                 } else if (player_2_choice === "scissors") {
                     player_1_wins++;
                         database.ref('players/' + player_1 + '/wins').set(player_1_wins);
-                            gameResults = player_1_name + ' wins!';
-                    
-                    player_2_losses++;
+                            gameResults = player_1_name + ' wins! ' + player_1_name + " you knocked out " + player_2_name + " with a rock!";
+                            console.log(gameResults);
+                   
+                        player_2_losses++;
                         database.ref('players/' + player_2 + '/losses').set(player_2_losses);
                    
                     outcome.update({ gameResults: gameResults });
-                    $('#round-results').html(player_1_name + ' wins! ' + player_1_name + " you knocked out " + player_2_name + " with a rock!");
+                    // $('.round-results').html(player_1_name + ' wins! ' + player_1_name + " you knocked out " + player_2_name + " with a rock!");
                     resetChoice();
 
                 } else if (player_2_choice === "rock") {
-                    gameResults = 'It\'s a tie!';
-                    outcome.update({ gameResults: gameResults });
-                    $('#round-results').html('Nice try, but it\'s a tie!');
+                    gameResults = 'Nice try, but it\'s a tie!';
+                    console.log(gameResults);
+                    outcome.set({ gameResults: gameResults });
+                    // $('.round-results').html('Nice try, but it\'s a tie!');
                     resetChoice();
                 }
 
@@ -418,47 +445,58 @@ Choices
                 if (player_2_choice === "rock") {
                     player_2_wins++;
                         database.ref('players/' + player_2 + '/wins').set(player_2_wins);
-                            gameResults = player_2_name + ' wins!';
-                    
+                            gameResults = player_2_name + ' wins! ' + player_2_name + " you knocked out " + player_1_name + " with a rock!";
+                            console.log(gameResults);
+
                     player_1_losses++;
                         database.ref('players/' + player_1 + '/losses').set(player_1_losses);
                   
                     outcome.update({ gameResults: gameResults });
-                    $('#round-results').html(player_2_name + ' wins! ' + player_2_name + " you knocked out " + player_1_name + " with a rock!");
+                    // $('.round-results').html(player_2_name + ' wins! ' + player_2_name + " you knocked out " + player_1_name + " with a rock!");
                     resetChoice();
                
                 } else if (player_2_choice === "paper") {
                     player_1_wins++;
                         database.ref('players/' + player_1 + '/wins').set(player_1_wins);
-                            gameResults = player_1_name + ' wins!';
-                    
+                            gameResults = player_1_name + ' wins! ' + player_1_name + " you shredded " + player_2_name + " with scissors!";
+                            console.log(gameResults);
+
                     player_2_losses++;
                     database.ref('players/' + player_2 + '/losses').set(player_2_losses);
 
                     outcome.update({ gameResults: gameResults });
-                    $('#round-results').html(player_1_name + ' wins! ' + player_1_name + " you shredded " + player_2_name + " with scissors!");
+                    // $('.round-results').html(player_1_name + ' wins ! ' + player_1_name + " you shredded " + player_2_name + " with scissors!");
                     resetChoice();
 
                 } else if (player_2_choice === "scissors") {
-                    gameResults = 'It\'s a tie!';
+                    gameResults = 'Nice try, but it\'s a tie!';
+                    console.log(gameResults);
                     outcome.update({ gameResults: gameResults });
-                    $('#round-results').html('Nice try, but it\'s a tie!');
+                    // $('.round-results').html('Nice try, but it\'s a tie!');
                     resetChoice();
                 }
             }
            
+        //     outcome.once('value').then(function(snapshot) {     
+        //         var data = snapshot.val().gameResults;   
+        //     $('.round-results').html(data + ' ');
+            
+        // })
+
         });
     }
+
     
+
+
+
 
 /*
 ========================================
-Chat
+
 ========================================
 */
-outcome.set({
-    gameResults: gameResults
-})
+
 
 
 
