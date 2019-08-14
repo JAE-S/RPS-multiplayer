@@ -57,20 +57,21 @@ $("#player-1").hide();
 $("#player-2").hide();
 $("#score-1").hide();
 $("#score-2").hide();
+$('#chat-box').hide();
 // $('#instructions').hide();
 
 $(document).ready(function() {
 
 /*
 ========================================
-Start Game
+shoot Game
 ========================================
 */
 
-$('#start').on('click', newPlayers);
+$('#shoot').on('click', newPlayers);
 var nameField = $('#userName');             // Hides name feild on click 
-var addPlayerButton = $('#start');         // Stoes new play 
-var chatRef = database.ref().child('chat');
+var addPlayerButton = $('#shoot');         // Stoes new play 
+var convo = database.ref().child('chat');
 var messageField = $('#message');
 var chatLog = $('#chat-log');
  /*
@@ -104,10 +105,11 @@ Add New Players
                 player_1 = 1;                           // Player count
                 player_2 = 2;                          // Player count
                 nameField.hide();                     // Hides initial name input on submit
-                addPlayerButton.hide();              // Hides initial start button on submit
+                addPlayerButton.hide();              // Hides initial shoot button on submit
                 $('#instructions').hide();          // Hides instructions on player input 
                 $("#player-1").show();             // Shows player 1 on player input 
                 $("#player-2").show();            // Shows player 2 on player input 
+                $('#chat-box').show();
                 console.log("This is tthe value of:" + player_1);
                 database.ref('turn').set(1);
                 playerCount.once('value').then(function(snapshot) { // Listens for player count
@@ -130,10 +132,11 @@ Add New Players
                 player_2 = 2;                         // Player count
                 player_1 = 1;                         // Player count
                 nameField.hide();                   // Hides initial name input on submit
-                addPlayerButton.hide();            // Hides initial start button on submit
+                addPlayerButton.hide();            // Hides initial shoot button on submit
                 $('#instructions').hide();
                 $("#player-1").show();            // Shows player 1 on player input 
                 $("#player-2").show();           // Shows player 2 on player input 
+                $('#chat-box').show();
                 console.log("This is tthe value of:" + player_2);
                 database.ref('turn').set(2);
 
@@ -158,10 +161,10 @@ Add New Players
 
 /*
 ========================================
-Start Game
+shoot Game
 ========================================
 */
-    function startGame() {
+    function shootGame() {
 
 
         // outcome.once('value', function(snapshot) {             
@@ -246,15 +249,21 @@ Start Game
            
         })
     };
- 
-    database.ref('gameResults').on('value', function(snapshot)  {     
-        var data = snapshot.val().gameResults;   
-    $('.round-results').html(data + ' ');
-})
 
-outcome.set({
-    gameResults: gameResults
-})
+/*
+========================================
+Outcome 
+========================================
+*/
+ 
+    database.ref('gameResults').on('value', function(snapshot)  {    // 
+        var data = snapshot.val().gameResults;   
+        $('.round-results').html(data + ' ');                       // Adds the outcome to both players screens  
+    })
+
+    outcome.set({                       // Resets outcome 
+        gameResults: gameResults
+    })
 /*
 ========================================
 Player Count
@@ -263,8 +272,8 @@ Player Count
  
     playerCount.on("value", function(snapshot) {       // Checks player count 
         totalPlayers = snapshot.val();               
-        if (totalPlayers === 2) {                      // If the total player count is 2 start the game 
-            startGame();
+        if (totalPlayers === 2) {                      // If the total player count is 2 shoot the game 
+            shootGame();
         }
         console.log(totalPlayers);
     });
@@ -476,28 +485,41 @@ Choices
                     resetChoice();
                 }
             }
-           
-        //     outcome.once('value').then(function(snapshot) {     
-        //         var data = snapshot.val().gameResults;   
-        //     $('.round-results').html(data + ' ');
-            
-        // })
 
         });
     }
 
-    
-
-
-
-
 /*
 ========================================
-
+Chat 
 ========================================
 */
+    $('#chat').on('click', function() {
 
+        var message = {
+            name: nameField.val(),
+            message: messageField.val()
+        };
 
+        convo.push(message);
+        messageField.val(' ');
 
+    });
+
+    convo.limitToLast(4).on('child_added', function(snapshot) {
+
+        var data = snapshot.val();
+        var player = data.name; 
+        var message = data.message;
+
+        var messageList = $('<li>');
+        var playerName = $('<span id="playerName"></span>');
+        playerName.html(player + ": ");
+        messageList.html(message).prepend(playerName);
+        chatLog.append(messageList);
+    
+    });
+
+    convo.onDisconnect().remove();          // Remove chat when the game is disconnected 
 
 })
