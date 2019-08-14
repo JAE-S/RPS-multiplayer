@@ -41,7 +41,6 @@ var player = {                  // Stores player details
 var player_1 = null;                // Sets up player 1
 var player_2 = null;                // Sets up player 2
 var totalPlayers = null;            // Sets up total number of players
-var nextPlayer = "";                // Stores next player's details
 var gameResults = "";               // Stores game results 
 
 /*
@@ -104,7 +103,8 @@ Add New Players
                 $('#instructions').hide();          // Hides instructions on player input 
                 $("#player-1").show();             // Shows player 1 on player input 
                 $("#player-2").show();            // Shows player 2 on player input 
-                
+                console.log("This is tthe value of:" + player_1);
+
                 playerCount.once('value').then(function(snapshot) { // Listens for player count
                     totalPlayers = snapshot.val();
                     if (totalPlayers === null) {
@@ -129,6 +129,7 @@ Add New Players
                 $('#instructions').hide();
                 $("#player-1").show();            // Shows player 1 on player input 
                 $("#player-2").show();           // Shows player 2 on player input 
+                console.log("This is tthe value of:" + player_1);
 
                 playerCount.once('value').then(function(snapshot) { // Listens for player count
                     totalPlayers = snapshot.val();
@@ -147,7 +148,7 @@ Add New Players
 
         });
     }
-    console.log(player); 
+
 
 /*
 ========================================
@@ -184,7 +185,7 @@ Start Game
                 $('#score-2').append('Losses: ' + playerOneLosses + ' ');
             }
         })
-        console.log(playerOne);
+        console.log("I am: " + playerOne);
 
         // Player 2 details from the database
         playerTwo.on('value', function(snapshot) {
@@ -207,7 +208,7 @@ Start Game
                 $('#score-1').append('Losses: ' + playerTwoLosses + ' ');
             }
         });
-        console.log(playerTwo);
+        console.log("I am: " + playerTwo);
 
         // Clears player details when a player disconnects
         if (playerOne.onDisconnect().remove()) {
@@ -220,35 +221,15 @@ Start Game
         database.ref('turn').on('value', function(snapshot) {
             var turn = snapshot.val();
 
-            if (turn === player_1) {                             // If its player 1's turn... 
-                $('#containerP-' + player_1).addClass('turn');
-                $('#containerP-' + player_2).removeClass('turn');
-                // $('.choice-' + player_1).show();
-            } else {                                              // If its player 2's turn... 
-                $('#containerP-' + player_1).removeClass('turn');
-                $('#containerP-' + player_2).addClass('turn');
-                // $('.choice-' + player_1).hide();
-
-                // var nextPlayer = database.ref('players/' + player_2 + '/name');
-                // nextPlayer.once('value', function(snapshot) {   // Once it's player 2's turn 
-                //     nextPlayer = snapshot.val();                // Once it's player 2's turn 
-                //         $('#status').html('It is ' + nextPlayer + '\'s turn');
-              
-                // });
+            if (turn === 1){
+                console.log("it is player 1's turn");
+            } else if (turn === 2){
+                console.log("it is player 2's turn");
             }
-            if (turn === player_1){
-                database.ref('players/' + player_1 + '/').on('value', function(snapshot) {
-                    var data = snapshot.val();
-                    $('#status').html('It is ' + data.name + '\'s turn');
-                });
-            } else {
-                database.ref('players/' + player_2 + '/').on('value', function(snapshot) {
-                    var data = snapshot.val();
-                    $('#status').html('It is ' + data.name + '\'s turn');
-                });
-            }
+           
         })
     };
+ 
 
 /*
 ========================================
@@ -278,8 +259,7 @@ Submit Choices
         database.ref('players/' + player_2 + '/choice').on('value', function(snapshot) {
             compareChoices();
         });
-        // $('.choice-1').hide();
-        // $('.choice-2').hide();
+
         var updateTurn = database.ref('turn');
         
         updateTurn.once('value', function(snapshot) {
@@ -287,8 +267,10 @@ Submit Choices
 
             if (currentTurn === 1) {
                 database.ref('turn').set(2);
+                console.log("My turn should be 1: " + currentTurn);
             } else {
                 database.ref('turn').set(1);
+                console.log("My turn should be 2: " + currentTurn);
             }
         });
     }
@@ -313,7 +295,7 @@ Reset Choices
 
     $('.choice-1').on('click', submitChoice);
     $('.choice-2').on('click', submitChoice);
-
+    
 /*
 ========================================
 Choices
@@ -326,14 +308,14 @@ Choices
 
             // Player 1 database details
             var player_1_name = snapshot.child('players/' + player_1 + '/name').val();
-            console.log(player_1_name);
+            console.log("Player 1 is: " + player_1_name);
             var player_1_choice = snapshot.child('players/' + player_1 + '/choice').val();
             var player_1_wins = snapshot.child('players/' + player_1 + '/wins').val();
             var player_1_losses = snapshot.child('players/' + player_1 + '/losses').val();
 
             // Player 2 database details
             var player_2_name = snapshot.child('players/' + player_2 + '/name').val();
-            console.log(player_2_name);
+            console.log("Player 2 is: " +  player_2_name);
             var player_2_choice = snapshot.child('players/' + player_2 + '/choice').val();
             var player_2_wins = snapshot.child('players/' + player_2 + '/wins').val();
             var player_2_losses = snapshot.child('players/' + player_2 + '/losses').val();
