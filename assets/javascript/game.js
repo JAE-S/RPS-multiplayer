@@ -51,8 +51,8 @@ Hidden Elements
 ========================================
 */
 
-$('.choice-1').hide();              // Initially hides player 1's choice on 
-$('.choice-2').hide();              // Initially hides player 2's choice 
+$('#player-1-choice').hide();              // Initially hides player 1's choice on 
+$('#player-2-choice').hide();              // Initially hides player 2's choice 
 $("#player-1").hide();
 $("#player-2").hide();
 $("#score-1").hide();
@@ -229,8 +229,8 @@ shoot Game
                 playerOne.on('value', function(snapshot) {
                     var data = snapshot.val();
                     var playerOneName = data.name;
-                    $('.choice-1').show();
-                    $('.choice-2').hide();
+                    $('#player-1-choice').show();
+                    $('#player-2-choice').hide();
                     $('#status').html('It is ' + playerOneName + '\'s turn');
                     console.log("please update to: " + playerOneName + "\"s turn");
                 })
@@ -239,8 +239,8 @@ shoot Game
                 playerTwo.on('value', function(snapshot) {
                     var data = snapshot.val();
                     var playerTwoName = data.name;
-                    $('.choice-1').hide();
-                    $('.choice-2').show();
+                    $('#player-1-choice').hide();
+                    $('#player-2-choice').show();
                     $('#status').html('It is ' + playerTwoName + '\'s turn');
                     console.log("please update to: " + playerTwoName + "\"s turn");
                 })

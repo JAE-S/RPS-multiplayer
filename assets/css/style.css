@@ -204,7 +204,7 @@ input, #shoot p {
   color:silver; 
 }
 
-#shoot {
+#shoot, #chat {
   background: url("../images/background.jpeg");
   background-size: cover;
   background-repeat: no-repeat; 
@@ -215,7 +215,7 @@ input, #shoot p {
   color:black; 
   letter-spacing: 2px; 
 }
-#shoot:hover {
+#shoot:hover, #chat:hover {
   border-style: inset;
   color: black;
 }
@@ -237,6 +237,42 @@ border-bottom: 1px solid silver;
 ol {
   padding: 0 2vw 2vh 2vw; 
 }
+
+.rockI {
+  max-width: 200px; 
+  width: 200px; 
+  height: 200px; 
+  background-image: url("../images/rock.png");
+  background-size: contain; 
+  background-repeat: no-repeat; 
+}
+
+.paperI {
+  max-width: 200px; 
+  width: 200px; 
+  height: 200px; 
+  background-image: url("../images/paper.png");
+  background-size: contain; 
+  background-repeat: no-repeat; 
+}
+
+.scissorsI {
+  max-width: 200px; 
+  width: 200px; 
+  height: 200px; 
+  background-image: url("../images/scissors.png");
+  background-size: contain; 
+  background-repeat: no-repeat; 
+}
+
+.options {
+  height: 20vw; 
+  background: white; 
+  margin: 0 auto; 
+  margin-top: 2vh; 
+  margin-bottom: 2vh; 
+}
+
 
 /* form{
     max-width: 500px;
