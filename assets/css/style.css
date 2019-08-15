@@ -17,6 +17,12 @@ Header - Nav Bar
 ========================================
 */
 
+header h4  {
+  opacity: 1;
+  color: black;
+  font-family:'Raleway', sans-serif;
+}
+
 .container1 {
   margin: 0 auto;
   max-width: 960px;
@@ -24,25 +30,30 @@ Header - Nav Bar
 }
 
 header {
-  background: white;
+  background-image: url("../images/background.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.5;
   border: 1px solid transparent;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  color: black;
-  font-family:'Raleway', sans-serif;
+ 
   padding: 20px 40px 20px 40px;
   position: static;
   z-index: 1;
 }
 
+
 nav a {
   color: black;
   margin-left: 1rem;
+  font-family:'Raleway', sans-serif;
+  font-weight: bold; 
   padding: .25rem 0;
 }
 
 nav a:hover {
   border-bottom: 2px solid black;
-  color: grey;
+  color: black;
   font-weight: Bold;
   text-decoration: none;
 }
@@ -62,10 +73,10 @@ body {
 }
 
 .background {
-  /* background-image: url("");
+  background-image: url("../images/background.jpeg");
   background-repeat: no-repeat;
-  background-size: cover; */
-  background: white;
+  background-size: cover;
+ 
   flex-grow: 1;
   padding: 5vh 5vw;
   width: 100%;
@@ -87,7 +98,7 @@ body {
   display: flex;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background: white;
-  padding: 4vh 4vw 1vh 4vw;
+  padding: 5.5vh 4vw 1vh 4vw;
   flex-direction: column;
   margin: 0 auto;
   /* width: 100%; */
@@ -117,12 +128,18 @@ body {
   footer
   ========================================
 */
+footer p {
+  color: black;
+  opacity: 1;
+  font-family: 'Raleway', sans-serif;
+}
 
 footer {
-  background: white;
+  background-image: url("../images/background.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.5;
   border-top: .25px solid silver;
-  color: black;
-  font-family: 'Raleway', sans-serif;
   padding-bottom: 10px;
   padding-top: 30px;
   position: static; 
@@ -148,14 +165,6 @@ h1 {
   text-decoration: none;
 }
 
-h2 {
-  color: grey;
-  font-family: 'Georgia', Times, 'Times New Roman', Times, serif;
-  font-size: 2rem;
-  margin-right: 1.5rem;
-  text-align: left;
-  text-decoration: none;
-}
 
 p {
   color: #777777;
@@ -166,9 +175,67 @@ p {
   Layout - RPS
 ========================================
 */
+input, #shoot p {
+  font-family: 'Raleway', sans-serif;
+  color: gray;
+}
+
 .introImage {
-    background: grey;
+    background: url("../images/cover_image.png");
+    background-size: contain; 
+    background-repeat: no-repeat; 
+    max-height: 65vh;
     height: 65vh;
+}
+.pageHeader h1, .pageHeader p {
+  display: table; 
+  margin: 0 auto; 
+  padding-bottom: 2vh; 
+}
+.pageHeader h1 {
+  color: grey; 
+  margin-bottom: 4vh; 
+  font-family: 'Raleway', sans-serif;
+}
+
+.pageHeader p {
+  font-family: arial;
+  letter-spacing: 1px;
+  color:silver; 
+}
+
+#shoot {
+  background: url("../images/background.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat; 
+  border: none; 
+  border-style: outset;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold; 
+  color:black; 
+  letter-spacing: 2px; 
+}
+#shoot:hover {
+  border-style: inset;
+  color: black;
+}
+
+li {
+  display: list-item;
+  line-height: 1.5;
+  list-style: decimal;
+  font-family: arial;
+  color:silver; 
+  letter-spacing: 1px;
+}
+
+li:hover {
+color: grey;
+border-bottom: 1px solid silver; 
+}
+
+ol {
+  padding: 0 2vw 2vh 2vw; 
 }
 
 /* form{
