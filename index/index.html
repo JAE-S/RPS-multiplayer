@@ -87,46 +87,50 @@
             <!--ACTIVE GAME CONTENT-->
             <section id="active-game">
                 <div class="row align-items-center text-center">
-                    <span class="text-center" id="status"></span>
+                   <h2><span class="text-center" id="status"></span></h2>
                 </div>
                 
                 <div class="row align-items-center text-center">
-                    <span class="container round-results"></span>
+                   <h2><span class="container round-results-2"></span></h2>
                 </div>
     
                 <div class="row align-items-center text-center">
                     <div class="col-lg-6 col-sm-"><!--Left text column-->
                         <div class="containerP turn" id="containerP-1">
                             <div class="text-center" id="player-1" data-turn="1">
-                                <h1>Waiting For Player 1...</h1>
+                                <h2>Waiting For Player 1...</h2>
                             </div>
-                            <div class="text-center" id="score-1">
-                                    <h1>score: </h1>
-                            </div>
+                           
                             <div class="options">
                             <div class="row text-center" id="player-1-choice">
                                 <div class="col-4 choice-1 resetTurn rockI" data-choice="rock" style="max-width: 33%"></div>
-                                <div class="col-4 resetTurn paperI" data-choice="paper" style="max-width: 33%"></div>
-                                <div class="col-4 resetTurn scissorsI" data-choice="scissors" style="max-width: 33%"></div>
+                                <div class="col-4 choice-1 resetTurn paperI" data-choice="paper" style="max-width: 33%"></div>
+                                <div class="col-4 choice-1 resetTurn scissorsI" data-choice="scissors" style="max-width: 33%"></div>
                             </div>
+                            </div>
+                            <div class="text-center" id="score-1">
+                                    score: 
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-"><!--Right text column-->
                         <div class="containerP" id="containerP-2">
                             <div class="text-center" id="player-2" data-turn="2">
-                                <h1>Waiting For Player 2...</h1>
+                                <h2>Waiting For Player 2...</h2>
+                            <div class="info"> 
                                 <span class="container" id="round-results-2"></span>
                             </div>
-                            <div class="text-center" id="score-2">
-                                    <h1>score: </h1>
                             </div>
+                        
                             <div class="options">
                             <div class="row text-center" id="player-2-choice">
                                 <div class="col-4 choice-2 resetTurn rockI" data-choice="rock" style="max-width: 33%"></div>
                                 <div class="col-4 choice-2 resetTurn paperI" data-choice="paper" style="max-width: 33%"></div>
                                 <div class="col-4 choice-2 resetTurn scissorsI" data-choice="scissors" style="max-width: 33%"></div>
                             </div>
+                            </div>
+                            <div class="text-center" id="score-2">
+                                    score: 
                             </div>
                         </div>
                     </div>
@@ -137,9 +141,9 @@
                     <div>
                         <ul id="chat-log"></ul>
                     </div>
-                        <div class="input-group">
+                        <span class="input-group text-center">
                         <input type="text" class="form-control" id="message" placeholder="Game on...">
-                            <button class="btn btn-dark" id="chat" type="submit">Chat</button>
+                            <button class="btn btn-dark" id="chat" type="submit"><span>CHAT</span></button>
                     </div>
                 </div>
 

@@ -51,8 +51,8 @@ Hidden Elements
 ========================================
 */
 
-$('#player-1-choice').hide();              // Initially hides player 1's choice on 
-$('#player-2-choice').hide();              // Initially hides player 2's choice 
+$('.choice-1').hide();              // Initially hides player 1's choice on 
+$('.choice-2').hide();              // Initially hides player 2's choice 
 $("#player-1").hide();
 $("#player-2").hide();
 $("#score-1").hide();
@@ -101,7 +101,7 @@ Add New Players
                 database.ref('players/1/').update(player);    // Updates player 1's details in firebase
                 var player_1_details = $('#player-1');       // Adds Player 1's name 
                 var player_2_details;                       // Prevents duplicate player
-                player_1_details.html(playerName + ' ');
+                player_1_details.html('PLAYER 1: ' + playerName + ' ');
                 player_1 = 1;                           // Player count
                 player_2 = 2;                          // Player count
                 nameField.hide();                     // Hides initial name input on submit
@@ -128,7 +128,7 @@ Add New Players
                 database.ref('players/2/').update(player);
                 var player_2_details = $('#player-2');
                 var player_1_details;
-                player_2_details.html(playerName + ' ');
+                player_2_details.html('PLAYER 2: ' + playerName + ' ');
                 player_2 = 2;                         // Player count
                 player_1 = 1;                         // Player count
                 nameField.hide();                   // Hides initial name input on submit
@@ -166,11 +166,6 @@ shoot Game
 */
     function shootGame() {
 
-
-        // outcome.once('value', function(snapshot) {             
-        //     $('#round-results').html(snapshot.val().gameResults + '');
-        // })
-       
         // Player details from the database
         var playerOne = database.ref('players/' + player_1 + '/');
         var playerTwo = database.ref('players/' + player_2 + '/');
@@ -185,7 +180,7 @@ shoot Game
             if (player_1 === 1) {
                 // $('.choice-1').show(); 
                 $("#score-1").show();
-                $('#player-1').html(playerOneName + ' ');
+                $('#player-1').html('PLAYER 1: ' + playerOneName + ' ');
                 $('#score-1').html('Wins: ' + playerOneWins + ' ');
                 $('#score-1').append('Losses: ' + playerOneLosses + ' ');
             }
@@ -202,7 +197,7 @@ shoot Game
             if (player_2 === 2) {
                 // $('.choice-2').show(); 
                 $("#score-2").show();
-                $('#player-2').html(playerTwoName + ' ');
+                $('#player-2').html('PLAYER 2: ' + playerTwoName + ' ');
                 $('#score-2').html('Wins: ' + playerTwoWins + ' ');
                 $('#score-2').append('Losses: ' + playerTwoLosses + ' ');
             }
@@ -229,8 +224,8 @@ shoot Game
                 playerOne.on('value', function(snapshot) {
                     var data = snapshot.val();
                     var playerOneName = data.name;
-                    $('#player-1-choice').show();
-                    $('#player-2-choice').hide();
+                    $('.choice-1').show();
+                    $('.choice-2').hide();
                     $('#status').html('It is ' + playerOneName + '\'s turn');
                     console.log("please update to: " + playerOneName + "\"s turn");
                 })
@@ -239,8 +234,8 @@ shoot Game
                 playerTwo.on('value', function(snapshot) {
                     var data = snapshot.val();
                     var playerTwoName = data.name;
-                    $('#player-1-choice').hide();
-                    $('#player-2-choice').show();
+                    $('.choice-1').hide();
+                    $('.choice-2').show();
                     $('#status').html('It is ' + playerTwoName + '\'s turn');
                     console.log("please update to: " + playerTwoName + "\"s turn");
                 })
@@ -258,7 +253,8 @@ Outcome
  
     database.ref('gameResults').on('value', function(snapshot)  {    // 
         var data = snapshot.val().gameResults;   
-        $('.round-results').html(data + ' ');                       // Adds the outcome to both players screens  
+        $('.round-results-2').html(data + ' ');                       // Adds the outcome to both players screens  
+        console.log(data)
     })
 
     outcome.set({                       // Resets outcome 
@@ -401,7 +397,7 @@ Choices
                             gameResults = player_1_name + ' wins! ' + player_1_name + " you covered " + player_2_name + " with paper!";
                     
                     player_2_losses++; 
-                        database.ref('players/' + player_2 + '/losses').set(layer_2_losses);
+                        database.ref('players/' + player_2 + '/losses').set(player_2_losses);
                     
                     outcome.update({ gameResults: gameResults });
                     // $('.round-results').html(player_1_name + ' wins! ' + player_1_name + " you covered " + player_2_name + " with paper!");
@@ -516,7 +512,7 @@ Chat
         var playerName = $('<span id="playerName"></span>');
         playerName.html(player + ": ");
         messageList.html(message).prepend(playerName);
-        chatLog.append(messageList);
+        chatLog.prepend(messageList);
     
     });
 
