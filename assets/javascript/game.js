@@ -344,17 +344,14 @@ Submit Choices
         update_p1_Choice.set(choice_1);
         console.log(choice_1);
         compareChoices();
-  
-        
     })
+
     $('.choice-2').on('click', function(){
         var choice_1 = $(this).attr('data-choice');
         var update_p2_Choice = database.ref('players/' + player_2 + '/choice');
         update_p2_Choice.set(choice_1);
         console.log(choice_1);
         compareChoices();
-     
-
     });
     
 /*
