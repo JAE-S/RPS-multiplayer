@@ -106,7 +106,8 @@ body {
   height: 74vh;
   /* width: 960px; */
   max-width: 960px;
-  overflow: scroll;
+  overflow: hidden;
+
 }
 
 .container3 { 
@@ -159,7 +160,7 @@ h4, h2 {
 
 h1 {
   font-family: 'Raleway', sans-serif;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-align: left;
   text-decoration: none;
@@ -191,6 +192,7 @@ input, #shoot p {
   display: table; 
   margin: 0 auto; 
   padding-bottom: 2vh; 
+
 }
 .pageHeader h1 {
   color: grey; 
@@ -300,8 +302,8 @@ ol {
   position: absolute; 
   max-height: 400px; 
   max-width: 850px; 
-  width: 850px; 
-  min-width: 200px; 
+  width: 90%; 
+  min-width: 1px; 
   padding-left: 4vw; 
   padding-right: 4vw; 
   bottom: 4vw; 
@@ -337,4 +339,8 @@ h2 {
   background: white; 
   padding-bottom: 10vh; 
   color: grey; 
+}
+
+#status {
+  border-bottom: 1px solid silver; 
 }
