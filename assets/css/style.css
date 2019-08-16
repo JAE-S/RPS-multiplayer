@@ -10,7 +10,7 @@ Giphy - Layout
   *, *::after, *::before {
     box-sizing: border-box;
   }
-
+  @media screen and (min-width: 743px) {
 /*
 ========================================
 Header - Nav Bar
@@ -103,10 +103,10 @@ body {
   margin: 0 auto;
   /* width: 100%; */
   max-height: 76vh;
-  height: 74vh;
+  height: 90%;
   /* width: 960px; */
   max-width: 960px;
-  overflow: hidden;
+  overflow: auto;
 
 }
 
@@ -187,6 +187,7 @@ input, #shoot p {
     background-repeat: no-repeat; 
     max-height: 65vh;
     height: 65vh;
+    max-width: 50%;
 }
 .pageHeader h1, .pageHeader p {
   display: table; 
@@ -343,4 +344,362 @@ h2 {
 
 #status {
   border-bottom: 1px solid silver; 
+}
+
+#instructions {
+  padding: 2% 2%;
+}
+.box {
+  max-width: 50%;
+}
+}
+
+@media screen and (max-width: 742px) {
+
+/*
+========================================
+Header - Nav Bar
+========================================
+*/
+
+header h4  {
+  opacity: 1;
+  color: black;
+  font-family:'Raleway', sans-serif;
+}
+
+.container1 {
+  margin: 0 auto;
+  max-width: 960px;
+
+}
+
+header {
+  background-image: url("../images/background.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.5;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ 
+  padding: 20px 40px 20px 40px;
+  position: static;
+  z-index: 1;
+}
+
+
+nav a {
+  color: black;
+  margin-left: 1rem;
+  font-family:'Raleway', sans-serif;
+  font-weight: bold; 
+  padding: .25rem 0;
+}
+
+nav a:hover {
+  border-bottom: 2px solid black;
+  color: black;
+  font-weight: Bold;
+  text-decoration: none;
+}
+
+/*
+========================================
+Main
+========================================
+*/
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.background {
+  background-image: url("../images/background.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex-grow: 1;
+  padding: 5vh 5vw;
+  width: 100%;
+  z-index: 0;
+}
+
+.container2 {
+  background: white;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+  margin: 0 auto;
+  /* max-height: 600px;  */
+  /* max-width: 960px; */
+  /* width: 960px; */
+  width: 100%;
+  /* padding: 4vh 4vw 1vh 4vw; */
+  z-index: 1;  
+}
+.masterContainer {
+  display: flex;
+  position: relative; 
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background: white;
+  padding: 2vh 4vw 1vh 4vw;
+  flex-direction: column;
+  margin: 0 auto;
+  /* width: 100%; */
+  max-height: 76vh;
+  height: 90%;
+  /* width: 960px; */
+  max-width: 960px;
+  overflow: auto;
+
+}
+
+.container3 { 
+  background: white;
+  border-bottom: 15px solid white; 
+  /* max-height: 580px;  */
+  /* max-width: 960px; */
+  /* width: 960px; */
+  margin: 0 auto;
+  width: 100%;
+  overflow: scroll;
+  /* padding: 0vh 4vw 1vh 4vw;   */
+  z-index: 1;
+  flex-grow: 1;
+}
+  
+/*
+  ========================================
+  footer
+  ========================================
+*/
+footer p {
+  color: black;
+  opacity: 1;
+  font-family: 'Raleway', sans-serif;
+}
+
+footer {
+  background-image: url("../images/background.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.5;
+  border-top: .25px solid silver;
+  padding-bottom: 10px;
+  padding-top: 30px;
+  position: static; 
+  z-index: 1;
+}
+
+/*
+  ========================================
+  Typography - Portfolio Styling
+  ========================================
+*/
+h4, h2 {
+  font-family: 'Raleway', sans-serif;
+  line-height: 40px;
+  font-size: 1.5rem;
+}
+
+h1 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: left;
+  text-decoration: none;
+}
+
+
+p {
+  color: #777777;
+  font-family: 'Raleway', sans-serif;
+}
+/*
+========================================
+  Layout - RPS
+========================================
+*/
+input, #shoot p {
+  font-family: 'Raleway', sans-serif;
+  color: gray;
+}
+
+.introImage {
+  background: url("../images/RPS_cover.png");
+  background-size: contain; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  max-height: 35vh;
+  height: 35vh;
+  max-width: 100%;
+  margin: 0 auto; 
+  margin: 0 4vw;
+}
+.pageHeader h1, .pageHeader p {
+  display: table; 
+  margin: 0 auto; 
+
+}
+.pageHeader h1 {
+  display: none; 
+}
+.pageHeader h1 {
+  padding-top: 2vh; 
+  color: grey; 
+  margin-bottom: 4vh; 
+  font-family: 'Raleway', sans-serif;
+}
+
+.pageHeader p {
+  font-family: arial;
+  letter-spacing: 1px;
+  color:silver; 
+}
+
+#shoot, #chat {
+  background: url("../images/background.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat; 
+  border: none; 
+  border-style: outset;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold; 
+  color:black; 
+  letter-spacing: 2px; 
+}
+#shoot:hover, #chat:hover {
+  border-style: inset;
+  color: black;
+}
+
+li {
+  display: list-item;
+  line-height: 1.5;
+  list-style: decimal;
+  font-family: arial;
+  color:silver; 
+  letter-spacing: 1px;
+}
+
+li:hover {
+color: grey;
+border-bottom: 1px solid silver; 
+}
+
+ol {
+  padding: 0 2vw 2vh 2vw; 
+}
+
+.rockI {
+  max-width: 200px; 
+  width: 200px; 
+  height: 200px; 
+  background-image: url("../images/rock.png");
+  background-size: contain; 
+  background-repeat: no-repeat; 
+}
+
+.paperI {
+  max-width: 200px; 
+  width: 200px; 
+  height: 200px; 
+  background-image: url("../images/paper.png");
+  background-size: contain; 
+  background-repeat: no-repeat; 
+}
+
+.scissorsI {
+  max-width: 200px; 
+  width: 200px; 
+  height: 200px; 
+  background-image: url("../images/scissors.png");
+  background-size: contain; 
+  background-repeat: no-repeat; 
+}
+
+.scissorsI:hover, .paperI:hover, .rockI:hover {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 0.5s; 
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite; 
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+
+.options {
+  height: 20vh; 
+  background: white; 
+  margin: 0 auto; 
+  margin-top: 2vh; 
+  margin-bottom: 2vh; 
+}
+
+#chat-box {
+  position: absolute; 
+  max-height: 400px; 
+  max-width: 850px; 
+  width: 90%; 
+  min-width: 1px; 
+  padding-left: 4vw; 
+  padding-right: 4vw; 
+  bottom: 4vw; 
+}
+
+.info {
+  height: 10vh; 
+  background: white; 
+  margin: 0 auto; 
+  margin-top: 1vh; 
+  margin-bottom: 1vh; 
+}
+
+#chat-log {
+  max-height: 150px;
+  overflow: scroll;
+}
+
+h2 {
+  display: table; 
+  margin: 0 auto; 
+}
+
+.containerP {
+  font-family: arial;
+  line-height: 1.5;
+  color:silver; 
+  letter-spacing: 1px;
+}
+
+.round-results-2 {
+  height: 10vh; 
+  background: white; 
+  padding-bottom: 10vh; 
+  color: grey; 
+}
+
+#status {
+  border-bottom: 1px solid silver; 
+}
+
+#instructions p, ol {
+  margin: 0 4vw;
+  text-align: left; 
+}
+
 }

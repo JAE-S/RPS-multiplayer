@@ -58,6 +58,7 @@ $("#player-2").hide();
 $("#score-1").hide();
 $("#score-2").hide();
 $('#chat-box').hide();
+$("#active-game").hide();
 // $('#instructions').hide();
 
 $(document).ready(function() {
@@ -110,6 +111,7 @@ Add New Players
                 $("#player-1").show();             // Shows player 1 on player input 
                 $("#player-2").show();            // Shows player 2 on player input 
                 $('#chat-box').show();
+                $("#active-game").show();
                 console.log("This is tthe value of:" + player_1);
                 database.ref('turn').set(1);
                 playerCount.once('value').then(function(snapshot) { // Listens for player count
@@ -137,6 +139,7 @@ Add New Players
                 $("#player-1").show();            // Shows player 1 on player input 
                 $("#player-2").show();           // Shows player 2 on player input 
                 $('#chat-box').show();
+                $("#active-game").show();
                 console.log("This is tthe value of:" + player_2);
                 database.ref('turn').set(2);
 
