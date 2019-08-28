@@ -51,15 +51,12 @@ Hidden Elements
 ========================================
 */
 
-$('.choice-1').hide();              // Initially hides player 1's choice on 
-$('.choice-2').hide();              // Initially hides player 2's choice 
-$("#player-1").hide();
-$("#player-2").hide();
-$("#score-1").hide();
-$("#score-2").hide();
+
+$("#containerP-1").hide();
+$("#containerP-2").hide();
 $('#chat-box').hide();
 $("#active-game").hide();
-// $('#instructions').hide();
+
 
 $(document).ready(function() {
 
@@ -75,13 +72,6 @@ var addPlayerButton = $('#shoot');         // Stoes new play
 var convo = database.ref().child('chat');
 var messageField = $('#message');
 var chatLog = $('#chat-log');
- /*
-========================================
-Hide instructions screen 
-========================================
-*/
-
-// $('#instructions').hide();
 
 /*
 ========================================
@@ -103,27 +93,21 @@ Add New Players
                 var player_1_details = $('#player-1');       // Adds Player 1's name 
                 var player_2_details;                       // Prevents duplicate player
                 player_1_details.html('PLAYER 1: ' + playerName + ' ');
+                $('#waiting').html(playerName + " You are currently the only player online." + '<br>' + "Share a link to this page with a friend to start playing!" + '<br>' + "Waiting for player 2...");
                 player_1 = 1;                           // Player count
-                player_2 = 2;                          // Player count
+                database.ref('turn').set(1);
                 nameField.hide();                     // Hides initial name input on submit
                 addPlayerButton.hide();              // Hides initial shoot button on submit
                 $('#instructions').hide();          // Hides instructions on player input 
-                $("#player-1").show();             // Shows player 1 on player input 
-                $("#player-2").show();            // Shows player 2 on player input 
+                $('.choice-1').hide();
+                $("#containerP-1").show();
+                $("#containerP-2").hide();
+             
                 $('#chat-box').show();
                 $("#active-game").show();
                 console.log("This is tthe value of:" + player_1);
-                database.ref('turn').set(1);
-                playerCount.once('value').then(function(snapshot) { // Listens for player count
-                    totalPlayers = snapshot.val();
-                    if (totalPlayers === null) {
-                        totalPlayers = 1;
-                        playerCount.set(totalPlayers); // Updates the playerCount in the database = totalPlayers
-                    } else {
-                        totalPlayers++;
-                        playerCount.set(totalPlayers);
-                    }
-                });
+                playerCount.set(1);   // Sets turn count to 1 
+                totalPlayers = 1;
 
             } else if (!snapshot.child('players/2').exists()) { // If player 2 does not exist, create player 2
 
@@ -131,28 +115,20 @@ Add New Players
                 var player_2_details = $('#player-2');
                 var player_1_details;
                 player_2_details.html('PLAYER 2: ' + playerName + ' ');
+
                 player_2 = 2;                         // Player count
-                player_1 = 1;                         // Player count
+                database.ref('turn').set(1);
                 nameField.hide();                   // Hides initial name input on submit
                 addPlayerButton.hide();            // Hides initial shoot button on submit
                 $('#instructions').hide();
-                $("#player-1").show();            // Shows player 1 on player input 
-                $("#player-2").show();           // Shows player 2 on player input 
+                $("#containerP-2").show();
+                $('.choice-2').hide();
+                $("#containerP-1").hide();
                 $('#chat-box').show();
                 $("#active-game").show();
                 console.log("This is tthe value of:" + player_2);
-                database.ref('turn').set(2);
-
-                playerCount.once('value').then(function(snapshot) { // Listens for player count
-                    totalPlayers = snapshot.val();
-                    if (totalPlayers === null) {
-                        totalPlayers = 1;
-                        playerCount.set(totalPlayers); // Updates the playerCount in the database = totalPlayers
-                    } else {
-                        totalPlayers++;
-                        playerCount.set(totalPlayers);
-                    }
-                });
+                playerCount.set(2);   // Sets turn count to 1 
+                totalPlayers = 2;
 
             } else { // If two players are signed into the database alert that the game is full 
                 alert('This game is currently full. Please try again later.');
@@ -160,7 +136,6 @@ Add New Players
 
         });
     }
-
 
 /*
 ========================================
@@ -170,8 +145,8 @@ shoot Game
     function shootGame() {
 
         // Player details from the database
-        var playerOne = database.ref('players/' + player_1 + '/');
-        var playerTwo = database.ref('players/' + player_2 + '/');
+        var playerOne = database.ref('players/1/');
+        var playerTwo = database.ref('players/2/');
 
         // Player 1 details from the database
         playerOne.on('value', function(snapshot) {
@@ -181,15 +156,13 @@ shoot Game
             var playerOneLosses = data.losses;
 
             if (player_1 === 1) {
-                // $('.choice-1').show(); 
-                $("#score-1").show();
+                $('#waiting').delay(1000).fadeOut('slow'); 
                 $('#player-1').html('PLAYER 1: ' + playerOneName + ' ');
                 $('#score-1').html('Wins: ' + playerOneWins + ' ');
                 $('#score-1').append('Losses: ' + playerOneLosses + ' ');
             }
         })
-        console.log("I am: " + player_1);
-
+   
         // Player 2 details from the database
         playerTwo.on('value', function(snapshot) {
             var data = snapshot.val();
@@ -198,14 +171,13 @@ shoot Game
             var playerTwoLosses = data.losses;
     
             if (player_2 === 2) {
-                // $('.choice-2').show(); 
-                $("#score-2").show();
+        
                 $('#player-2').html('PLAYER 2: ' + playerTwoName + ' ');
                 $('#score-2').html('Wins: ' + playerTwoWins + ' ');
                 $('#score-2').append('Losses: ' + playerTwoLosses + ' ');
-            }
+
+            } 
         });
-        console.log("I am: " + player_2);
 
         // Clears player details when a player disconnects
         if (playerOne.onDisconnect().remove()) {
@@ -227,20 +199,27 @@ shoot Game
                 playerOne.on('value', function(snapshot) {
                     var data = snapshot.val();
                     var playerOneName = data.name;
-                    $('.choice-1').show();
-                    $('.choice-2').hide();
                     $('#status').html('It is ' + playerOneName + '\'s turn');
                     console.log("please update to: " + playerOneName + "\"s turn");
+                    if(turn === 1){
+                        $('.choice-1').show();
+                    } else {
+                        $('.choice-1').hide();
+                    }
                 })
                 console.log("it is player 1's turn");
             } else if (turn === 2){
                 playerTwo.on('value', function(snapshot) {
                     var data = snapshot.val();
                     var playerTwoName = data.name;
-                    $('.choice-1').hide();
-                    $('.choice-2').show();
+        
                     $('#status').html('It is ' + playerTwoName + '\'s turn');
                     console.log("please update to: " + playerTwoName + "\"s turn");
+                    if(turn === 2){
+                        $('.choice-2').show();
+                    } else {
+                        $('.choice-2').hide();
+                    }
                 })
                 console.log("it is player 2's turn");
             }
@@ -256,7 +235,10 @@ Outcome
  
     database.ref('gameResults').on('value', function(snapshot)  {    // 
         var data = snapshot.val().gameResults;   
-        $('.round-results-2').html(data + ' ');                       // Adds the outcome to both players screens  
+        $('.round-results-2').fadeIn('slow');
+            $('.round-results-2').html(data + ' ');                       // Adds the outcome to both players screens  
+            $('.round-results-2').delay(3000).fadeOut('slow'); 
+      
         console.log(data)
     })
 
@@ -274,7 +256,7 @@ Player Count
         if (totalPlayers === 2) {                      // If the total player count is 2 shoot the game 
             shootGame();
         }
-        console.log(totalPlayers);
+        console.log('Total number of active players: ' + totalPlayers);
     });
 
 /*
@@ -284,23 +266,25 @@ Turn Tracker
 */
 
     $(".resetTurn").on('click', function (){
+        
         database.ref().once("value", function(snapshot) {
-            var player_1_name = snapshot.child('players/' + player_1 + '/name').val();
-            var player_2_name = snapshot.child('players/' + player_2 + '/name').val();
-
-
+            var player_1_name = snapshot.child('players/1/name').val();
+            var player_2_name = snapshot.child('players/2/name').val();
+            $('.choice-2').hide();
             turn.once('value').then(function(snapshot) { 
                 currentTurn = snapshot.val();
                 if (currentTurn === null) {
                     currentTurn = 1;
                     turn.set(currentTurn); 
-                } else if (currentTurn === 1) {
-                    currentTurn = 2;
+                } else if (currentTurn === 1) { 
+            
+                    currentTurn = 2;  
                     turn.set(currentTurn); 
                     console.log("please update to: " + player_1_name + "\"s turn");
                     console.log("My turn should be 1: " + currentTurn);
                     console.log("player 1 clicked a button");
                 } else if (currentTurn === 2) {
+               
                     currentTurn = 1;
                     turn.set(currentTurn); 
                     console.log("please update to: " + player_2_name + "\"s turn");
@@ -308,11 +292,13 @@ Turn Tracker
                     console.log("player 2: clicked a button");
                     
                 }
+           
             });
+            
+       
         });
     })
- 
- 
+  
 /*
 ========================================
 Reset Choices 
@@ -322,11 +308,10 @@ Reset Choices
     function resetChoice() {
 
         var choice = "";
-        var update_p1_Choice = database.ref('players/' + player_1 + '/choice');
-        var update_p2_Choice = database.ref('players/' + player_2 + '/choice');
+        var update_p1_Choice = database.ref('players/1/choice');
+        var update_p2_Choice = database.ref('players/2/choice');
         update_p1_Choice.set(choice);
         update_p2_Choice.set(choice);
-      
     }
 
 /*
@@ -335,22 +320,21 @@ Submit Choices
 ========================================
 */
 
-
-
-
-    $('.choice-1').on('click', function(){
+     $(document).on('click', '.choice-1', function(){
         var choice_1 = $(this).attr('data-choice');
-        var update_p1_Choice = database.ref('players/' + player_1 + '/choice');
+        var update_p1_Choice = database.ref('players/1/choice');
         update_p1_Choice.set(choice_1);
         console.log(choice_1);
+        $('.choice-1').fadeOut('slow'); 
         compareChoices();
     })
 
-    $('.choice-2').on('click', function(){
+    $(document).on('click', '.choice-2', function(){
         var choice_1 = $(this).attr('data-choice');
-        var update_p2_Choice = database.ref('players/' + player_2 + '/choice');
+        var update_p2_Choice = database.ref('players/2/choice');
         update_p2_Choice.set(choice_1);
         console.log(choice_1);
+        $('.choice-2').fadeOut('slow'); 
         compareChoices();
     });
     
@@ -366,18 +350,18 @@ Choices
         database.ref().once("value", function(snapshot) {
 
             // Player 1 database details
-            var player_1_name = snapshot.child('players/' + player_1 + '/name').val();
+            var player_1_name = snapshot.child('players/1/name').val();
             console.log("Player 1 is: " + player_1_name);
-            var player_1_choice = snapshot.child('players/' + player_1 + '/choice').val();
-            var player_1_wins = snapshot.child('players/' + player_1 + '/wins').val();
-            var player_1_losses = snapshot.child('players/' + player_1 + '/losses').val();
+            var player_1_choice = snapshot.child('players/1/choice').val();
+            var player_1_wins = snapshot.child('players/1/wins').val();
+            var player_1_losses = snapshot.child('players/1/losses').val();
 
             // Player 2 database details
-            var player_2_name = snapshot.child('players/' + player_2 + '/name').val();
+            var player_2_name = snapshot.child('players/2/name').val();
             console.log("Player 2 is: " +  player_2_name);
-            var player_2_choice = snapshot.child('players/' + player_2 + '/choice').val();
-            var player_2_wins = snapshot.child('players/' + player_2 + '/wins').val();
-            var player_2_losses = snapshot.child('players/' + player_2 + '/losses').val();
+            var player_2_choice = snapshot.child('players/2/choice').val();
+            var player_2_wins = snapshot.child('players/2/wins').val();
+            var player_2_losses = snapshot.child('players/2/losses').val();
     
             // Game Results
             var gameResults = snapshot.child
@@ -386,32 +370,31 @@ Choices
             if (player_1_choice === "paper") {
                 if (player_2_choice === "scissors") {
                     player_2_wins++;
-                        database.ref('players/' + player_2 + '/wins').set(player_2_wins);
+                        database.ref('players/2/wins').set(player_2_wins);
                             gameResults = player_2_name + ' wins! ' + player_2_name + " you shredded " + player_1_name + " with scissors!";
                     
                     player_1_losses++;
-                        database.ref('players/' + player_1 + '/losses').set(player_1_losses);
+                        database.ref('players/1/losses').set(player_1_losses);
                     
                     outcome.update({ gameResults: gameResults });
-                    // $('.round-results').html(player_2_name + ' wins! ' + player_2_name + " you shredded " + player_1_name + " with scissors!");
+               
                     resetChoice();
 
                 } else if (player_2_choice === "rock") {
                     player_1_wins++;
-                        database.ref('players/' + player_1 + '/wins').set(player_1_wins);
+                        database.ref('players/1/wins').set(player_1_wins);
                             gameResults = player_1_name + ' wins! ' + player_1_name + " you covered " + player_2_name + " with paper!";
                     
                     player_2_losses++; 
-                        database.ref('players/' + player_2 + '/losses').set(player_2_losses);
+                        database.ref('players/2/losses').set(player_2_losses);
                     
                     outcome.update({ gameResults: gameResults });
-                    // $('.round-results').html(player_1_name + ' wins! ' + player_1_name + " you covered " + player_2_name + " with paper!");
+                 
                     resetChoice();
 
                 } else if (player_2_choice === "paper") {
                     gameResults = 'Nice try, but it\'s a tie!';
                     outcome.update({ gameResults: gameResults });
-                    // $('.round-results').html('Nice try, but it\'s a tie!');
                     resetChoice();
                 }
     
@@ -419,70 +402,70 @@ Choices
             } else if (player_1_choice === "rock") {
                 if (player_2_choice === "paper") {
                     player_2_wins++;
-                        database.ref('players/' + player_2 + '/wins').set(player_2_wins);
+                        database.ref('players/2/wins').set(player_2_wins);
                             gameResults = player_2_name + ' wins! ' + player_2_name + " you covered " + player_1_name + " with paper!";
                             console.log(gameResults);
 
                     player_1_losses++;
-                        database.ref('players/' + player_1 + '/losses').set(player_1_losses);
+                        database.ref('players/1/losses').set(player_1_losses);
                     
                     outcome.update({ gameResults: gameResults });
-                    // $('.round-results').html(player_2_name + ' wins! ' + player_2_name + " you covered " + player_1_name + " with paper!");
+                
                     resetChoice();
                     
                 } else if (player_2_choice === "scissors") {
                     player_1_wins++;
-                        database.ref('players/' + player_1 + '/wins').set(player_1_wins);
+                        database.ref('players/1/wins').set(player_1_wins);
                             gameResults = player_1_name + ' wins! ' + player_1_name + " you knocked out " + player_2_name + " with a rock!";
                             console.log(gameResults);
                    
                         player_2_losses++;
-                        database.ref('players/' + player_2 + '/losses').set(player_2_losses);
+                        database.ref('players/2/losses').set(player_2_losses);
                    
                     outcome.update({ gameResults: gameResults });
-                    // $('.round-results').html(player_1_name + ' wins! ' + player_1_name + " you knocked out " + player_2_name + " with a rock!");
+                  
                     resetChoice();
 
                 } else if (player_2_choice === "rock") {
                     gameResults = 'Nice try, but it\'s a tie!';
                     console.log(gameResults);
                     outcome.set({ gameResults: gameResults });
-                    // $('.round-results').html('Nice try, but it\'s a tie!');
+                
                     resetChoice();
                 }
 
             } else if (player_1_choice === "scissors") {
                 if (player_2_choice === "rock") {
                     player_2_wins++;
-                        database.ref('players/' + player_2 + '/wins').set(player_2_wins);
+                        database.ref('players/2/wins').set(player_2_wins);
                             gameResults = player_2_name + ' wins! ' + player_2_name + " you knocked out " + player_1_name + " with a rock!";
                             console.log(gameResults);
 
                     player_1_losses++;
-                        database.ref('players/' + player_1 + '/losses').set(player_1_losses);
+                        database.ref('players/1/losses').set(player_1_losses);
                   
                     outcome.update({ gameResults: gameResults });
-                    // $('.round-results').html(player_2_name + ' wins! ' + player_2_name + " you knocked out " + player_1_name + " with a rock!");
+                   
                     resetChoice();
                
                 } else if (player_2_choice === "paper") {
                     player_1_wins++;
-                        database.ref('players/' + player_1 + '/wins').set(player_1_wins);
+                        database.ref('players/1/wins').set(player_1_wins);
                             gameResults = player_1_name + ' wins! ' + player_1_name + " you shredded " + player_2_name + " with scissors!";
                             console.log(gameResults);
 
                     player_2_losses++;
-                    database.ref('players/' + player_2 + '/losses').set(player_2_losses);
+                    database.ref('players/2/losses').set(player_2_losses);
 
                     outcome.update({ gameResults: gameResults });
-                    // $('.round-results').html(player_1_name + ' wins ! ' + player_1_name + " you shredded " + player_2_name + " with scissors!");
+               
                     resetChoice();
 
                 } else if (player_2_choice === "scissors") {
                     gameResults = 'Nice try, but it\'s a tie!';
                     console.log(gameResults);
                     outcome.update({ gameResults: gameResults });
-                    // $('.round-results').html('Nice try, but it\'s a tie!');
+        
                     resetChoice();
                 }
             }
