@@ -81,7 +81,7 @@ Add New Players
 
     function newPlayers() {
         firebase.auth().signInAnonymously();              // Firebase initial authentication sign in 
-        var playerName = $('#userName').val().trim();     // Stores unserName input as playerName 
+        var playerName = $('#userName').val().toUpperCase().trim();     // Stores unserName input as playerName 
         player.name = playerName;                         // Stores the player's name input in the player object
         player.uid = firebase.auth().currentUser.uid;     // Stores firebase's unique id for the current user in the player object 
 
@@ -93,7 +93,7 @@ Add New Players
                 var player_1_details = $('#player-1');       // Adds Player 1's name 
                 var player_2_details;                       // Prevents duplicate player
                 player_1_details.html('PLAYER 1: ' + playerName + ' ');
-                $('#waiting').html(playerName + " You are currently the only player online." + '<br>' + "Share a link to this page with a friend to start playing!" + '<br>' + "Waiting for player 2...");
+                $('#waiting').html(playerName + ", you are currently the only player online." + '<br>' + "Share a link of this page with a friend to start playing!" + '<br>' + "Waiting for player 2...");
                 player_1 = 1;                           // Player count
                 database.ref('turn').set(1);
                 nameField.hide();                     // Hides initial name input on submit
@@ -158,8 +158,9 @@ shoot Game
             if (player_1 === 1) {
                 $('#waiting').delay(1000).fadeOut('slow'); 
                 $('#player-1').html('PLAYER 1: ' + playerOneName + ' ');
-                $('#score-1').html('Wins: ' + playerOneWins + ' ');
-                $('#score-1').append('Losses: ' + playerOneLosses + ' ');
+                $('#score-1').html('Losses: ' + playerOneLosses + ' ' + "<br>");
+                $('#score-1').append('Wins: ' + playerOneWins + ' ');
+               
             }
         })
    
@@ -173,8 +174,9 @@ shoot Game
             if (player_2 === 2) {
         
                 $('#player-2').html('PLAYER 2: ' + playerTwoName + ' ');
-                $('#score-2').html('Wins: ' + playerTwoWins + ' ');
-                $('#score-2').append('Losses: ' + playerTwoLosses + ' ');
+                $('#score-2').html('Losses: ' + playerTwoLosses + ' ' + "<br>");
+                $('#score-2').append('Wins: ' + playerTwoWins + ' ');
+               
 
             } 
         });
@@ -199,7 +201,7 @@ shoot Game
                 playerOne.on('value', function(snapshot) {
                     var data = snapshot.val();
                     var playerOneName = data.name;
-                    $('#status').html('It is ' + playerOneName + '\'s turn');
+                    $('#status').html(playerOneName + '\'S TURN!');
                     console.log("please update to: " + playerOneName + "\"s turn");
                     if(turn === 1){
                         $('.choice-1').show();
@@ -213,7 +215,7 @@ shoot Game
                     var data = snapshot.val();
                     var playerTwoName = data.name;
         
-                    $('#status').html('It is ' + playerTwoName + '\'s turn');
+                    $('#status').html(playerTwoName + '\'S TURN!');
                     console.log("please update to: " + playerTwoName + "\"s turn");
                     if(turn === 2){
                         $('.choice-2').show();
@@ -237,7 +239,7 @@ Outcome
         var data = snapshot.val().gameResults;   
         $('.round-results-2').fadeIn('slow');
             $('.round-results-2').html(data + ' ');                       // Adds the outcome to both players screens  
-            $('.round-results-2').delay(3000).fadeOut('slow'); 
+            $('.round-results-2').delay(4000).fadeOut('slow'); 
       
         console.log(data)
     })

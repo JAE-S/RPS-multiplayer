@@ -93,60 +93,57 @@
                    <h2><span class="text-center" id="status"></span></h2>
                 </div>
                 
-                <div class="row align-items-center text-center">
-                   <h2><span class="container round-results-2"></span></h2>
-                </div>
-    
-                <div class="row align-items-center text-center">
-                    <div class="col-lg-6 col-sm-"><!--Left text column-->
-                        <div class="containerP turn" id="containerP-1">
-                            <div class="text-center" id="player-1" data-turn="1">
-                              
-                                <h2>Waiting For Player 1...</h2>
-                            </div>
-                            <h2><span class="text-center" id="waiting"></span></h2>
-                            <div class="text-center" id="score-1"></div>
-                            <!-- <div class="options"> -->
+                    <div class="containerP turn" id="containerP-1">
 
-                            <div class="row text-center" id="player-1-choice">
+                    <div class="row align-items-center text-center">
+                        <h2><span class="container round-results-2"></span></h2>
+                    </div>
+     
+                        <h2><span class="text-center" id="waiting"></span></h2>
+
+                        <div class="align-items-center" id="player-1-choice">
+                            <div class="row align-items-center text-center">
+                                <h2><span id="player-2-selecting"></span></h2>
                                 <div class="col-4 choice-1 resetTurn rockI" data-choice="rock" style="max-width: 33%"></div>
                                 <div class="col-4 choice-1 resetTurn paperI" data-choice="paper" style="max-width: 33%"></div>
                                 <div class="col-4 choice-1 resetTurn scissorsI" data-choice="scissors" style="max-width: 33%"></div>
-                           
                             </div>
-                            
+                            <div class="row align-items-center text-center labels">
+                                <div class="col-4 choice-1" style="max-width: 33%">ROCK</div>
+                                <div class="col-4 choice-1" style="max-width: 33%">PAPER</div>
+                                <div class="col-4 choice-1" style="max-width: 33%">SCISSORS</div>
                             </div>
-                         
-                        <!-- </div> -->
-                    </div>
-                    <div class="col-lg-6 col-sm-"><!--Right text column-->
-                        <div class="containerP" id="containerP-2">
-                            <div class="text-center" id="player-2" data-turn="2">
-                                <h2><strong>Waiting For Player 2...</strong></h2>
-                                <div class="info"> 
-                                    <span class="container" id="round-results-2"></span>
-                                </div>
-                            </div>
-                            <div class="text-center" id="score-2">
-                                score: 
-                            </div>
+                        </div>
+
                         
-                            <!-- <div class="options"> -->
-                            <div class="row text-center" id="player-2-choice">
+                            <div class="row game-text" id="player-1" data-turn="1"></div>
+                            <div class="row game-text" id="score-1"></div>
+                    </div>
+                
+                    <div class="containerP" id="containerP-2">
+                            <div class="row align-items-center text-center">
+                                    <h2><span class="container round-results-2"></span></h2>
+                                 </div>
+                        <div id="player-2-choice">
+                            <div class="row align-items-center text-center">
+                                <h2><span id="player-1-selecting"></span></h2>
                                 <div class="col-4 choice-2 resetTurn rockI" data-choice="rock" style="max-width: 33%"></div>
                                 <div class="col-4 choice-2 resetTurn paperI" data-choice="paper" style="max-width: 33%"></div>
                                 <div class="col-4 choice-2 resetTurn scissorsI" data-choice="scissors" style="max-width: 33%"></div>
-                          
-                          
+                            </div>
+                            <div class="row align-items-center text-center labels">
+                                <div class="col-4 choice-2" style="max-width: 33%">ROCK</div>
+                                <div class="col-4 choice-2" style="max-width: 33%">PAPER</div>
+                                <div class="col-4 choice-2" style="max-width: 33%">SCISSORS</div>
                             </div>
                         </div>
-                       
-                        <!-- </div> -->
+                            <div class="row game-text" id="player-2" data-turn="2"></div>
+                            <div class="row game-text" id="score-2"></div>
+                    
                     </div>
-                </div>
-
+            
                 <!-- Chat section -->
-                <div id="row chat-box">
+                <div id="chat-box">
                     <div>
                         <ul id="chat-log"></ul>
                     </div>
