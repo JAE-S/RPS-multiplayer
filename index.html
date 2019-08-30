@@ -26,6 +26,7 @@
         <!-- Css Style Sheets -->
         <link rel="stylesheet" href="assets/css/reset.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/media_screens.css">
 
     </head>
     <body> 
@@ -46,22 +47,24 @@
         
         <!--GAME CONTENT-->
         <main class="background"> 
-            <div class="masterContainer">
+            <div >
 
         <!-- INSTRUCTIONS PAGE CONTENT-->
-            <section id="instructions">
+            <section id="instructions" class="masterContainer">
                 <div class="row align-items-center">
-                    <div class="introImage col-lg-6 col-sm-"> <!-- Left image column -->
+                    <div class="col-lg-6 col-sm-" style="max-width: 90%"> <!-- Left image column -->
+                    <img class="img-fluid" src="assets/images/cover_image.png" width="450" height="auto" alt="Rock Paper Scissors">
                     </div>
 
-                    <div class="pageHeader col-lg-6 col-sm- box"><!--Right text column-->
+                    <div class="col-lg-6 col-sm- box"><!--Right text column-->
+                        <div class="pageHeader">
                         <div class="row text-center">
                             <h1>ROCK, PAPER, SCISSORS</h1>
                         </div>
                         <div> 
-                            <h2>INSTRUCTIONS: </h2>
+                          
                             <ol>
-                                <li>Send a link of this page to a friend.</li>
+                                <li>To get started, send a link of this page to a friend.</li>
                                 <li>The first person to press 'click me' will be player 1.</li>
                                 <li>When there are 2 players the game will begin.</li>
                                 <li>On your turn press one of the images to make your selection (rock, paper, or scissors).</l1>
@@ -77,7 +80,7 @@
                                   <button class="btn btn-dark" id="shoot" type="submit">CLICK ME</button>
                                 </div>
                             </div>
-                       
+                        </div>
                     </div>
 
                     <audio id="sound-button">
@@ -88,70 +91,77 @@
             </section>
 
             <!--ACTIVE GAME CONTENT-->
-            <section id="active-game">
-                <div class="row align-items-center text-center">
-                   <h2><span class="text-center" id="status"></span></h2>
-                </div>
+            <section id="active-game" class="masterContainer2">
                 
                     <div class="containerP turn" id="containerP-1">
 
-                    <div class="row align-items-center text-center">
-                        <h2><span class="container round-results-2"></span></h2>
-                    </div>
-     
-                        <h2><span class="text-center" id="waiting"></span></h2>
-
                         <div class="align-items-center" id="player-1-choice">
-                            <div class="row align-items-center text-center">
-                                <h2><span id="player-2-selecting"></span></h2>
-                                <div class="col-4 choice-1 resetTurn rockI" data-choice="rock" style="max-width: 33%"></div>
-                                <div class="col-4 choice-1 resetTurn paperI" data-choice="paper" style="max-width: 33%"></div>
-                                <div class="col-4 choice-1 resetTurn scissorsI" data-choice="scissors" style="max-width: 33%"></div>
+                            <h2><span class="text-center" id="player-1"></span></h2>
+                            <h2><span class="text-center" id="waiting"></span></h2>
+
+                            <div class="row align-items-center text-center options">
+                                <video autoplay loop muted id="waiting-for-player-2">
+                                    <source src="assets/images/rps_waiting_2.mp4" type="video/mp4" alt="Waiting for opponent!">
+                                </video>
+                                    <div class="col-4 choice-1 resetTurn rockI" data-choice="rock" style="max-width: 33%"></div>
+                                    <div class="col-4 choice-1 resetTurn paperI" data-choice="paper" style="max-width: 33%"></div>
+                                    <div class="col-4 choice-1 resetTurn scissorsI" data-choice="scissors" style="max-width: 33%"></div>
                             </div>
                             <div class="row align-items-center text-center labels">
-                                <div class="col-4 choice-1" style="max-width: 33%">ROCK</div>
-                                <div class="col-4 choice-1" style="max-width: 33%">PAPER</div>
-                                <div class="col-4 choice-1" style="max-width: 33%">SCISSORS</div>
+                                <span class="col-4 choice-1" style="max-width: 33%">ROCK</span>
+                                <span class="col-4 choice-1" style="max-width: 33%">PAPER</span>
+                                <span class="col-4 choice-1" style="max-width: 33%">SCISSORS</span>
                             </div>
                         </div>
-
                         
-                            <div class="row game-text" id="player-1" data-turn="1"></div>
-                            <div class="row game-text" id="score-1"></div>
+                            <div class="row game-text" id="status-1" data-turn="1"></div>
+                            
+                            <div class="game-info">
+                                <p>RESULTS: <span class="container round-results-2"></span></h2>
+                                <div id="score-1"></div>
+                            </div>
                     </div>
                 
                     <div class="containerP" id="containerP-2">
-                            <div class="row align-items-center text-center">
-                                    <h2><span class="container round-results-2"></span></h2>
-                                 </div>
-                        <div id="player-2-choice">
-                            <div class="row align-items-center text-center">
-                                <h2><span id="player-1-selecting"></span></h2>
+
+                        <div class="align-items-center" id="player-2-choice">
+                                <h2><span class="text-center" id="player-2"></span></h2>
+
+                            <div class="row align-items-center text-center options">     
+                                <video autoplay loop muted id="waiting-for-player-1">
+                                    <source src="assets/images/rps_waiting_2.mp4" type="video/mp4" alt="Waiting for opponent!">
+                                </video>
                                 <div class="col-4 choice-2 resetTurn rockI" data-choice="rock" style="max-width: 33%"></div>
                                 <div class="col-4 choice-2 resetTurn paperI" data-choice="paper" style="max-width: 33%"></div>
                                 <div class="col-4 choice-2 resetTurn scissorsI" data-choice="scissors" style="max-width: 33%"></div>
                             </div>
                             <div class="row align-items-center text-center labels">
-                                <div class="col-4 choice-2" style="max-width: 33%">ROCK</div>
-                                <div class="col-4 choice-2" style="max-width: 33%">PAPER</div>
-                                <div class="col-4 choice-2" style="max-width: 33%">SCISSORS</div>
+                                <span class="col-4 choice-2" style="max-width: 33%">ROCK</span>
+                                <span class="col-4 choice-2" style="max-width: 33%">PAPER</span>
+                                <span class="col-4 choice-2" style="max-width: 33%">SCISSORS</span>
                             </div>
                         </div>
-                            <div class="row game-text" id="player-2" data-turn="2"></div>
-                            <div class="row game-text" id="score-2"></div>
+
+                            <div class="row game-text" id="status-2" data-turn="2"></div>
+                            <div class="game-info">
+                                <p>RESULTS: <span class="container round-results-2"></span></h2>
+                                <div id="score-2"></div>
+                            </div>
                     
                     </div>
             
                 <!-- Chat section -->
                 <div id="chat-box">
-                    <div>
-                        <ul id="chat-log"></ul>
-                    </div>
-                        <span class="input-group text-center">
+                    <div> 
+                        <span class="input-group text-center input-chat">
                         <input type="text" class="form-control" id="message" placeholder="Game on...">
-                            <button class="btn btn-dark" id="chat" type="submit"><span>CHAT</span></button>
-                    </div>
+                        <button class="btn btn-dark" id="chat" type="submit"><span>CHAT</span></button>
+                    </div>  
+                        <div>
+                            <ul id="chat-log"></ul>
+                        </div>
                 </div>
+            </div>
 
                     <!-- Reset Button-->
                         <!-- <button id="restart" class="btn btn-dark btn-block" onclick="restart()">Play Again</button> -->

@@ -10,6 +10,7 @@ Giphy - Layout
   *, *::after, *::before {
     box-sizing: border-box;
   }
+
   @media screen and (min-width: 743px) {
 /*
 ========================================
@@ -17,748 +18,406 @@ Header - Nav Bar
 ========================================
 */
 
-header h4  {
-  opacity: 1;
-  color: black;
-  font-family:'Raleway', sans-serif;
-}
-
-.container1 {
-  margin: 0 auto;
-  max-width: 960px;
-
-}
-
-header {
-  background-image: url("../images/background.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 0.5;
-  border: 1px solid transparent;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
- 
-  padding: 20px 40px 20px 40px;
-  position: static;
-  z-index: 1;
-}
-
-
-nav a {
-  color: black;
-  margin-left: 1rem;
-  font-family:'Raleway', sans-serif;
-  font-weight: bold; 
-  padding: .25rem 0;
-}
-
-nav a:hover {
-  border-bottom: 2px solid black;
-  color: black;
-  font-weight: Bold;
-  text-decoration: none;
-}
-
-/*
-========================================
-Main
-========================================
-*/
-
-body {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  min-height: 100vh;
-  overflow: hidden;
-}
-
-.background {
-  background-image: url("../images/background.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  flex-grow: 1;
-  padding: 5vh 5vw;
-  width: 100%;
-  z-index: 0;
-}
-
-.container2 {
-  background: white;
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
-  margin: 0 auto;
-  /* max-height: 600px;  */
-  /* max-width: 960px; */
-  /* width: 960px; */
-  width: 100%;
-  /* padding: 4vh 4vw 1vh 4vw; */
-  z-index: 1;  
-}
-.masterContainer {
-  display: flex;
-  position: relative; 
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  background: white;
-  padding: 5.5vh 4vw 1vh 4vw;
-  flex-direction: column;
-  margin: 0 auto;
-  /* width: 100%; */
-  max-height: 76vh;
-  height: 76vh;
-  /* width: 960px; */
-  max-width: 960px;
-  overflow: auto;
-
-}
-
-.container3 { 
-  background: white;
-  border-bottom: 15px solid white; 
-  /* max-height: 580px;  */
-  /* max-width: 960px; */
-  /* width: 960px; */
-  margin: 0 auto;
-  width: 100%;
-  overflow: scroll;
-  /* padding: 0vh 4vw 1vh 4vw;   */
-  z-index: 1;
-  flex-grow: 1;
-}
-  
-/*
-  ========================================
-  footer
-  ========================================
-*/
-footer p {
-  color: black;
-  opacity: 1;
-  font-family: 'Raleway', sans-serif;
-}
-
-footer {
-  background-image: url("../images/background.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 0.5;
-  border-top: .25px solid silver;
-  padding-bottom: 10px;
-  padding-top: 30px;
-  position: static; 
-  z-index: 1;
-}
-
-/*
-  ========================================
-  Typography - Portfolio Styling
-  ========================================
-*/
-h4, h2 {
-  font-family: 'Raleway', sans-serif;
-  line-height: 40px;
-  font-size: 1.5rem;
-}
-
-h1 {
-  font-family: 'Raleway', sans-serif;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: left;
-  text-decoration: none;
-}
-
-
-p {
-  color: #777777;
-  font-family: 'Raleway', sans-serif;
-}
-/*
-========================================
-  Layout - RPS
-========================================
-*/
-input, #shoot p {
-  font-family: 'Raleway', sans-serif;
-  color: gray;
-}
-
-.introImage {
-    background: url("../images/cover_image.png");
-    background-size: contain; 
-    background-repeat: no-repeat; 
-    max-height: 65vh;
-    height: 65vh;
-    max-width: 50%;
-}
-.pageHeader h1, .pageHeader p {
-  display: table; 
-  margin: 0 auto; 
-  padding-bottom: 2vh; 
-
-}
-.pageHeader h1 {
-  color: grey; 
-  margin-bottom: 4vh; 
-  font-family: 'Raleway', sans-serif;
-}
-
-.pageHeader p {
-  font-family: arial;
-  letter-spacing: 1px;
-  color:silver; 
-}
-
-#shoot, #chat {
-  background: url("../images/background.jpeg");
-  background-size: cover;
-  background-repeat: no-repeat; 
-  border: none; 
-  border-style: outset;
-  font-family: 'Raleway', sans-serif;
-  font-weight: bold; 
-  color:black; 
-  letter-spacing: 2px; 
-}
-#shoot:hover, #chat:hover {
-  border-style: inset;
-  color: black;
-}
-
-li {
-  display: list-item;
-  line-height: 1.5;
-  list-style: decimal;
-  font-family: arial;
-  color:silver; 
-  letter-spacing: 1px;
-}
-
-li:hover {
-color: grey;
-border-bottom: 1px solid silver; 
-}
-
-ol {
-  padding: 0 2vw 2vh 2vw; 
-}
-
-#player-1-choice, #player-2-choice {
-  height: 200px;
-  z-index: 1; 
-  position: relative; 
-}
-
-.rockI {
-  max-width: 200px; 
-  width: 200px; 
-  height: 200px; 
-  background-image: url("../images/rock.png");
-  background-size: contain; 
-  background-repeat: no-repeat; 
-  background-position: 4vw;
-}
-
-.paperI {
-  max-width: 200px; 
-  width: 200px; 
-  height: 200px; 
-  background-image: url("../images/paper.png");
-  background-size: contain; 
-  background-repeat: no-repeat; 
-  background-position: 2vw;
-}
-
-.scissorsI {
-  max-width: 200px; 
-  width: 200px; 
-  height: 200px; 
-  background-image: url("../images/scissors.png");
-  background-size: contain; 
-  background-repeat: no-repeat; 
-  background-position: 4vw;
-}
-
-.scissorsI:hover, .paperI:hover, .rockI:hover {
-  /* Start the shake animation and make the animation last for 0.5 seconds */
-  animation: shake 0.5s; 
-
-  /* When the animation is finished, start again */
-  animation-iteration-count: infinite; 
-}
-
-@keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
-}
-
-#chat-box {
-  position: absolute; 
-  max-height: 400px; 
-  max-width: 850px; 
-  width: 90%; 
-  min-width: 1px; 
-  padding-left: 4vw; 
-  padding-right: 4vw; 
-  bottom: 4vw; 
-}
-
-.info {
-  height: 10vh; 
-  background: white; 
-  margin: 0 auto; 
-  margin-top: 1vh; 
-  margin-bottom: 1vh; 
-}
-
-#chat-log {
-  max-height: 130px;
-  overflow: scroll;
-}
-
-h2 {
-  display: table; 
-  margin: 0 auto; 
-}
-
-.containerP {
-  font-family: arial;
-  line-height: 1.5;
-  color:silver; 
-  letter-spacing: 1px;
-}
-
-.round-results-2 {
-  height: 10vh; 
-  text-align: center;
-  background: white; 
-  padding-bottom: 2vh; 
-  color: grey; 
-}
-
-#status {
-  color: grey; 
-  font-weight: lighter; 
-  border-bottom: 1px solid silver; 
-}
-
-#instructions {
-  padding: 2% 2%;
-}
-.box {
-  max-width: 50%;
-}
-.pageHeader h1 {
-  display: inline-block; 
-}
-.game-text {
-  display: table; 
-  margin: 0 auto; 
-}
-#player-1, #player-2 {
-  max-width: 850px; 
-  width: 90%; 
-  background-color: grey; 
-  color: white; 
-  font-weight: bold; 
-  margin-top: 4vh; 
-  margin-bottom: 1vh; 
-  text-align: center; 
-}
-
-#waiting {
-  z-index: 2; 
-  position: absolute;
-  left: 12vw; 
-  color: black;
-  font-weight: bold; 
-}
-#waiting:hover {
-  color: grey;
-  border-bottom: 1px solid silver; 
-  font-weight: bold; 
-}
-
-}
-
-@media screen and (max-width: 742px) {
-
-/*
-========================================
-Header - Nav Bar
-========================================
-*/
-
-header h4  {
-  opacity: 1;
-  color: black;
-  font-family:'Raleway', sans-serif;
-}
-
-.container1 {
-  margin: 0 auto;
-  max-width: 960px;
-
-} 
-
-header {
-  background-image: url("../images/background.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 0.5;
-  border: 1px solid transparent;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
- 
-  padding: 20px 40px 20px 40px;
-  position: static;
-  z-index: 1;
-}
-
-
-nav a {
-  color: black;
-  margin-left: 1rem;
-  font-family:'Raleway', sans-serif;
-  font-weight: bold; 
-  padding: .25rem 0;
-}
-
-nav a:hover {
-  border-bottom: 2px solid black;
-  color: black;
-  font-weight: Bold;
-  text-decoration: none;
-} 
-
-/* 
-========================================
-Main
-========================================
-*/
-
-body {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  min-height: 100vh;
-  overflow: hidden;
-}
-
-.background {
-  background-image: url("../images/background.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  flex-grow: 1;
-  padding: 5vh 5vw;
-  width: 100%;
-  z-index: 0;
-}
-
-.container2 {
-  background: white; 
-  margin: 0 auto; 
-  width: 100%;
-  z-index: 1;  
-}
-.masterContainer {
-  display: flex;
-  position: relative; 
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  background: white;
-  padding: 2vh 4vw 1vh 4vw;
-  flex-direction: column;
-  margin: 0 auto;
-  max-height: 76vh;
-  height: 76vh;
-  max-width: 960px;
-  overflow: auto;
-}
-
-.container3 { 
-  background: white;
-  border-bottom: 15px solid white; 
-  margin: 0 auto;
-  width: 100%;
-  overflow: scroll;
-  z-index: 1;
-  flex-grow: 1;
-}
-  
-/*
-  ========================================
-  footer
-  ========================================
-*/
-footer p {
-  color: black;
-  opacity: 1;
-  font-family: 'Raleway', sans-serif;
-}
-
-footer {
-  background-image: url("../images/background.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 0.5;
-  border-top: .25px solid silver;
-  padding-bottom: 10px;
-  padding-top: 30px;
-  position: static; 
-  z-index: 1;
-}
-
-/*
-  ========================================
-  Typography - Portfolio Styling
-  ========================================
-*/
- h4, h2 {
-  font-family: 'Raleway', sans-serif;
-  line-height: 40px;
-  font-size: 1.5rem;
-}
-
-h1 {
-  font-family: 'Raleway', sans-serif;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: left;
-  text-decoration: none;
-}
-
-
-p {
-  color: #777777;
-  font-family: 'Raleway', sans-serif;
-} 
-/*
-========================================
-  Layout - RPS
-========================================
-*/
- input, #shoot p {
-  font-family: 'Raleway', sans-serif;
-  color: gray;
-}
-
-
-.introImage {
-  background: url("../images/RPS_cover.png");
-  background-size: contain; 
-  background-position: center; 
-  background-repeat: no-repeat; 
-  max-height: 35vh;
-  height: 35vh;
-  max-width: 100%;
-  margin: 0 auto; 
-  margin: 0 4vw;
-}
-.pageHeader h1, .pageHeader p {
-  display: table; 
-  margin: 0 auto; 
-
-}
-.pageHeader h1 {
-  display: none; 
-}
-
-.game-text {
-  display: table; 
-  margin: 0 auto; 
-}
-
-#player-1, #player-2 {
-  background-color: grey; 
-  width: 100%; 
-  color: white; 
-  font-weight: bold; 
-  margin-top: 2vh; 
-  margin-bottom: 1vh; 
-  text-align: center; 
-}
-
-#waiting {
-  z-index: 2; 
-  position: absolute;
-  left: 1vw; 
-  padding: 1vh;
-  font-size: 1.2rem; 
-  color: black;
-  font-weight: bold; 
-}
-#waiting:hover {
-  color: grey;
-  border-bottom: 1px solid silver; 
-  font-weight: bold; 
-}
-
-.pageHeader h1 {
-  padding-top: 2vh; 
-  color: grey; 
-  margin-bottom: 4vh; 
-  font-family: 'Raleway', sans-serif;
-}
-
-.pageHeader p {
-  font-family: arial;
-  letter-spacing: 1px;
-  color:silver; 
-}
-
-#shoot, #chat {
-  background: url("../images/background.jpeg");
-  background-size: cover;
-  background-repeat: no-repeat; 
-  border: none; 
-  border-style: outset;
-  font-family: 'Raleway', sans-serif;
-  font-weight: bold; 
-  color:black; 
-  letter-spacing: 2px; 
-}
-#shoot:hover, #chat:hover {
-  border-style: inset;
-  color: black;
-}
-
-li {
-  display: list-item;
-  line-height: 1.5;
-  list-style: decimal;
-  font-family: arial;
-  color:silver; 
-  letter-spacing: 1px;
-}
-
-li:hover {
-color: grey;
-border-bottom: 1px solid silver; 
-}
-
-ol {
-  padding: 0 2vw 2vh 2vw; 
-}
-
-#player-1-choice, #player-2-choice {
-  height: 200px;
-  z-index: 1; 
-  padding-top: 6vh; 
-  position: relative; 
-}
-
-.rockI {
-  max-width: 200px; 
-  width: 200px; 
-  height: 100px; 
-  background-image: url("../images/rock.png");
-  background-size: contain; 
-  background-repeat: no-repeat; 
-}
-
-.paperI {
-  max-width: 200px; 
-  width: 200px; 
-  height: 100px; 
-  background-image: url("../images/paper.png");
-  background-size: contain; 
-  background-repeat: no-repeat; 
-}
-
-.scissorsI {
-  max-width: 200px; 
-  width: 200px; 
-  height: 100px; 
-  background-image: url("../images/scissors.png");
-  background-size: contain; 
-  background-repeat: no-repeat; 
-} 
-
-.scissorsI:hover, .paperI:hover, .rockI:hover {
-  /* Start the shake animation and make the animation last for 0.5 seconds */
-  animation: shake 0.5s; 
-
-  /* When the animation is finished, start again */
-   animation-iteration-count: infinite; 
-}
-
-@keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
-}
-
-
-#chat-box {
-  position: absolute; 
-  max-height: 400px; 
-  max-width: 850px; 
-  width: 90%; 
-  min-width: 1px; 
-  padding-left: 2vw; 
-  padding-right: 2vw; 
-  bottom: 2vh; 
-}
-
-.info {
-  height: 10vh; 
-  background: white; 
-  margin: 0 auto; 
-  margin-top: 1vh; 
-  margin-bottom: 1vh; 
-}
-
-#chat-log {
-  max-height: 120px;
-  overflow: scroll;
-}
-
-h2 {
-  display: table; 
-  margin: 0 auto; 
-}
-
-.containerP {
-  font-family: arial;
-  line-height: 1.5;
-  color:silver; 
-  letter-spacing: 1px;
-}
-
-.round-results-2 {
-  text-align: center;
-  height: 10vh; 
-  background: white; 
-  padding-bottom: 2vh; 
-  color: grey; 
-}
-
-#status {
-  font-weight: lighter; 
-  color: grey; 
-  border-bottom: 1px solid silver; 
-}
-
-#instructions p, ol {
-  margin: 0 4vw;
-  text-align: left; 
-}
-  #score-2 {
-    padding-bottom: 10px;
+  header h4  {
+               color: black;
+         font-family:'Raleway', sans-serif;
+             opacity: 1; 
+  }
+  .container1 {
+              margin: 0 auto;
+           max-width: 960px;
+  }
+  header {
+    background-image: url("../images/background.jpeg");
+   background-repeat: no-repeat;
+     background-size: cover;
+              border: 1px solid transparent;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+             opacity: 0.5;
+             padding: 20px 40px 20px 40px;
+            position: static;
+             z-index: 1;
+  }
+  nav a {
+                color: black;
+          font-family:'Raleway', sans-serif;
+          font-weight: bold; 
+          margin-left: 1rem;   
+              padding: .25rem 0;
+  }
+  nav a:hover {
+        border-bottom: 2px solid black;
+                color: black;
+          font-weight: Bold;
+      text-decoration: none;
   }
 
+  /*
+  ========================================
+  Main
+  ========================================
+  */
+
+  body {
+              display: flex;
+       flex-direction: column;
+               margin: 0 auto;
+           min-height: 100vh;
+             overflow: hidden;
+  }
+  .background {
+     background-image: url("../images/background.jpeg");
+    background-repeat: no-repeat;
+      background-size: cover;
+            flex-grow: 1;
+              padding: 5vh 5vw;
+                width: 100%;
+              z-index: 0;
+  }
+  .container2 {
+           background: white;
+               margin: 0 auto;
+                width: 100%;
+              z-index: 1;  
+  }
+  .masterContainer {
+           background: white;
+           box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+              display: flex;
+       flex-direction: column;
+               height: auto;
+            max-width: 960px;
+               margin: 0 auto;
+             overflow: auto;
+             position: relative; 
+  }
+  .masterContainer2 {
+    background: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+       display: flex;
+flex-direction: column;
+        height: 74vh; 
+     max-width: 960px;
+        margin: 0 auto;
+      overflow: auto;
+      position: relative; 
 }
+
+  .container3 { 
+           background: white;
+        border-bottom: 15px solid white;
+            flex-grow: 1;
+               margin: 0 auto;
+             overflow: scroll;
+                width: 100%;
+              z-index: 1;
+  }
+    
+  /*
+    ========================================
+    footer
+    ========================================
+  */
+  footer p {
+                color: black;
+          font-family: 'Raleway', sans-serif;
+           opacity: 1;
+  }
+  footer {
+     background-image: url("../images/background.jpeg");
+    background-repeat: no-repeat;
+      background-size: cover;
+           border-top: .25px solid silver;
+              opacity: 0.5;
+       padding-bottom: 10px;
+          padding-top: 30px;
+             position: static; 
+              z-index: 1;
+  }
+
+  /*
+    ========================================
+    Typography - Portfolio Styling
+    ========================================
+  */
+  h4, h2 {
+          font-family: 'Raleway', sans-serif;
+            font-size: 1.5rem;
+          line-height: 40px;
+  }
+  h1 {
+          font-family: 'Raleway', sans-serif;
+            font-size: 1.5rem;
+          font-weight: bold;
+           text-align: left;
+      text-decoration: none;
+  }
+  p {
+                color: #777777;
+          font-family: 'Raleway', sans-serif;
+  }
+  /*
+  ========================================
+    Layout - RPS - Typography
+  ========================================
+  */
+  input, #shoot p {
+                color: gray;
+          font-family: 'Raleway', sans-serif;
+  }
+  .pageHeader h1, .pageHeader p {
+              display: table; 
+               margin: 0 auto; 
+       padding-bottom: 2vh; 
+
+  }
+  h2, .game-text {
+              display: table; 
+               margin: 0 auto;
+               padding-top: 2vh;  
+  }
+  .pageHeader h1 {
+       border-bottom: 4px double silver;
+               color: grey; 
+             display: inline-block; 
+         font-family: 'Raleway', sans-serif;
+       margin-bottom: 2vh; 
+  }
+  .pageHeader p {
+               color:silver; 
+         font-family: arial;
+      letter-spacing: 1px;
+  }
+
+  #score-1, #score-2 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    color: grey; 
+  }
+  /* .round-results-2 p {
+    font-weight: bold;
+  } */
+
+  .round-results-2:hover {
+    border-bottom: 1px solid silver; 
+  }
+  #shoot, #chat {
+    background-image: url("../images/background.jpeg");
+     background-size: cover;
+   background-repeat: no-repeat; 
+              border: none; 
+        border-style: outset;
+               color:black; 
+         font-family: 'Raleway', sans-serif;
+         font-weight: bold; 
+      letter-spacing: 2px; 
+  }
+  #shoot:hover, #chat:hover {
+        border-style: inset;
+               color: black;
+  }
+  .containerP {
+               color:silver; 
+         font-family: arial;
+         line-height: 1.5; 
+      letter-spacing: 1px;
+  }
+  li {
+              color:silver; 
+            display: list-item;
+        font-family: arial;
+          font-size: .95rem;
+        line-height: 2;
+     letter-spacing: 1px;
+         list-style: decimal;
+  }
+  li:hover {
+      border-bottom: 1px solid silver; 
+              color: grey;
+  }
+  ol {
+            padding: 2vh 2vw; 
+  }
+  
+ /*
+  ========================================
+    Layout - RPS - 
+  ========================================
+  */
+
+  #instructions {
+              padding: 2% 2%;
+  }
+  .box {
+            max-width: 50%;
+  }
+
+ /*
+========================================
+  RPS - Media
+========================================
+*/
+
+  #waiting-for-player-1, #waiting-for-player-2 {
+              height: auto; 
+              max-width: 780px;       
+               width: 100%; 
+              margin: 0 auto; 
+              padding: 0 20px;
+  }
+
+  img {
+              height: auto; 
+           max-width: 100%;
+             /* padding: 10px; */
+  }
+ .rockI {
+    background-image: url("../images/rock.png");
+ background-position: 7vw;
+   background-repeat: no-repeat;
+     background-size: contain;  
+              height: 200px; 
+           max-width: 200px; 
+               width: 200px; 
+ }
+ .paperI {
+    background-image: url("../images/paper.png");
+ background-position: 3vw;
+   background-repeat: no-repeat; 
+     background-size: contain; 
+              height: 200px; 
+           max-width: 200px; 
+               width: 200px; 
+ }
+ .scissorsI {
+    background-image: url("../images/scissors.png");
+ background-position: 2vw;
+   background-repeat: no-repeat; 
+     background-size: contain; 
+              height: 200px; 
+           max-width: 200px; 
+               width: 200px; 
+ }
+ .labels {
+  opacity: 0;
+}
+.options:hover + .labels, .labels:hover {
+  opacity: 1;
+}
+
+/*
+========================================
+  RPS - Shake Animation
+========================================
+*/
+  .scissorsI:hover, .paperI:hover, .rockI:hover {
+    /* Start the shake animation and make the animation last for 0.5 seconds */
+    animation: shake 0.5s; 
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite; 
+  }
+  @keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
+/*
+========================================
+  RPS - Chat Box
+========================================
+*/
+
+  #chat-box {
+             
+           max-height: 400px; 
+            max-width: 780px; 
+                width: 70%;  
+                margin: 0 auto; 
+     
+             position: relative; 
+  }
+  #chat-log {
+               bottom: -2vh;
+           max-height: 120px;
+             overflow: scroll;
+             padding: 0;
+             position: relative;
+  }
+  #chat-log li {
+    font-size: 1rem; 
+    line-height: 1.2;
+  }
+  .input-chat{
+    bottom: -2vh;
+  }
+
+/*
+========================================
+  RPS - Game Features
+========================================
+*/
+ 
+.game-info {
+
+  border-bottom: 4px double silver; 
+  border-top: 4px double silver; 
+  font-weight: bold;
+           max-width: 780px; 
+               width: 70%; 
+               margin: 0 auto; 
+               padding: 1vh 0;
+}
+
+#player-1-choice, #player-2-choice {
+              height: 200px;
+            position: relative; 
+             z-index: 1; 
+}
+  .round-results-2 {
+               color: grey; 
+          background: white; 
+              height: 10vh; 
+      padding-bottom: 2vh; 
+         font-weight: bold;
+          text-align: left;   
+  }
+  #player-1 , #player-2  {
+       border-bottom: 1px solid silver; 
+               color: grey; 
+         font-weight: lighter; 
+  } 
+  #status-1, #status-2 {
+               color: grey;  
+          margin-top: 10vh; 
+           max-width: 780px; 
+               width: 70%; 
+               padding: 1vh 0;
+          text-align: center; 
+
+  }
+  #waiting {
+               color: black;
+             display: table;
+         font-weight: bold; 
+           max-width: 780px;
+               width: 100%;
+              margin: 0 auto;
+         padding-top: 4vh;
+            position: relative;
+  }
+  #waiting:hover {
+       border-bottom: 1px solid silver; 
+               color: grey;
+         font-weight: bold; 
+  }
+
+} /* End of media screen */

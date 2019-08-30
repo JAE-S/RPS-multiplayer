@@ -56,7 +56,8 @@ $("#containerP-1").hide();
 $("#containerP-2").hide();
 $('#chat-box').hide();
 $("#active-game").hide();
-
+$('#waiting-for-player-1').hide();
+$('#waiting-for-player-2').hide();
 
 $(document).ready(function() {
 
@@ -102,8 +103,9 @@ Add New Players
                 $('.choice-1').hide();
                 $("#containerP-1").show();
                 $("#containerP-2").hide();
+                $('.game-info').hide();
              
-                $('#chat-box').show();
+                $('#chat-box').hide();
                 $("#active-game").show();
                 console.log("This is tthe value of:" + player_1);
                 playerCount.set(1);   // Sets turn count to 1 
@@ -124,6 +126,7 @@ Add New Players
                 $("#containerP-2").show();
                 $('.choice-2').hide();
                 $("#containerP-1").hide();
+               
                 $('#chat-box').show();
                 $("#active-game").show();
                 console.log("This is tthe value of:" + player_2);
@@ -156,7 +159,10 @@ shoot Game
             var playerOneLosses = data.losses;
 
             if (player_1 === 1) {
+                
                 $('#waiting').delay(1000).fadeOut('slow'); 
+                $('.game-info').show();
+                $('#chat-box').show();
                 $('#player-1').html('PLAYER 1: ' + playerOneName + ' ');
                 $('#score-1').html('Losses: ' + playerOneLosses + ' ' + "<br>");
                 $('#score-1').append('Wins: ' + playerOneWins + ' ');
@@ -172,12 +178,10 @@ shoot Game
             var playerTwoLosses = data.losses;
     
             if (player_2 === 2) {
-        
+                $('#waiting-for-player-1').show(); 
                 $('#player-2').html('PLAYER 2: ' + playerTwoName + ' ');
-                $('#score-2').html('Losses: ' + playerTwoLosses + ' ' + "<br>");
-                $('#score-2').append('Wins: ' + playerTwoWins + ' ');
-               
-
+                $('#score-2').html('LOSSES: ' + playerTwoLosses + ' ' + "<br>");
+                $('#score-2').append('WINS: ' + playerTwoWins + ' ');
             } 
         });
 
@@ -201,10 +205,12 @@ shoot Game
                 playerOne.on('value', function(snapshot) {
                     var data = snapshot.val();
                     var playerOneName = data.name;
-                    $('#status').html(playerOneName + '\'S TURN!');
+                    $('#status-1').html(playerOneName + '\'S TURN!');
+                    $('#status-2').html(playerOneName + '\'S TURN!');
                     console.log("please update to: " + playerOneName + "\"s turn");
                     if(turn === 1){
                         $('.choice-1').show();
+                        $('#waiting-for-player-2').hide();
                     } else {
                         $('.choice-1').hide();
                     }
@@ -214,14 +220,13 @@ shoot Game
                 playerTwo.on('value', function(snapshot) {
                     var data = snapshot.val();
                     var playerTwoName = data.name;
-        
-                    $('#status').html(playerTwoName + '\'S TURN!');
+                    $('.choice-2').show();
+
+                    $('#waiting-for-player-1').hide();
+                    $('#status-2').html(playerTwoName + '\'S TURN!');
+                    $('#status-1').html(playerTwoName + '\'S TURN!');
                     console.log("please update to: " + playerTwoName + "\"s turn");
-                    if(turn === 2){
-                        $('.choice-2').show();
-                    } else {
-                        $('.choice-2').hide();
-                    }
+                  
                 })
                 console.log("it is player 2's turn");
             }
@@ -238,7 +243,7 @@ Outcome
     database.ref('gameResults').on('value', function(snapshot)  {    // 
         var data = snapshot.val().gameResults;   
         $('.round-results-2').fadeIn('slow');
-            $('.round-results-2').html(data + ' ');                       // Adds the outcome to both players screens  
+            $('.round-results-2').html(' ' + data + ' ');                       // Adds the outcome to both players screens  
             $('.round-results-2').delay(4000).fadeOut('slow'); 
       
         console.log(data)
@@ -273,6 +278,7 @@ Turn Tracker
             var player_1_name = snapshot.child('players/1/name').val();
             var player_2_name = snapshot.child('players/2/name').val();
             $('.choice-2').hide();
+            $('#waiting-for-player-1').show(); 
             turn.once('value').then(function(snapshot) { 
                 currentTurn = snapshot.val();
                 if (currentTurn === null) {
@@ -286,7 +292,7 @@ Turn Tracker
                     console.log("My turn should be 1: " + currentTurn);
                     console.log("player 1 clicked a button");
                 } else if (currentTurn === 2) {
-               
+            
                     currentTurn = 1;
                     turn.set(currentTurn); 
                     console.log("please update to: " + player_2_name + "\"s turn");
@@ -327,7 +333,8 @@ Submit Choices
         var update_p1_Choice = database.ref('players/1/choice');
         update_p1_Choice.set(choice_1);
         console.log(choice_1);
-        $('.choice-1').fadeOut('slow'); 
+        $('#waiting-for-player-2').fadeIn('slow'); 
+        $('.choice-1').hide(); 
         compareChoices();
     })
 
@@ -336,10 +343,11 @@ Submit Choices
         var update_p2_Choice = database.ref('players/2/choice');
         update_p2_Choice.set(choice_1);
         console.log(choice_1);
-        $('.choice-2').fadeOut('slow'); 
-        compareChoices();
+        $('.choice-2').hide();
+        compareChoices(); /// set time out to get the giff to 
     });
-    
+
+
 /*
 ========================================
 Choices
