@@ -2,7 +2,7 @@
  <img src="assets/images/rps_cover_2.png" align="right"
      title="Crystal Collector" width="40%" height="auto">
 
-# Welcome to RPS - Multiplayer!
+# Welcome to RPS-Multiplayer!
 
 #### With interactivity, teamwork, and playfulness at its core, Rock Paper Scissors can now be played online with a friend or coworker across the globe.  Utilizing Firebase in real-time and a custom Bootstrap frontend, this classic game will never be the same.
 ---
