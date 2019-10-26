@@ -79,4 +79,4 @@
     
 ---
 
-[Back To Top](#welcome-to-rps-multiplayer)
+[Back To Top](#welcome-to-rps-multiplayer!)
